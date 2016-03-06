@@ -1,0 +1,11 @@
+api.jokes_random :
+    path     : /jokes
+    methods  : GET
+    defaults :
+        _controller: \Chuck\App\Api\Controller\JokesController::indexAction
+
+api.jokes_slack :
+    path     : /slack
+    methods  : GET
+    defaults :
+        _controller: \Chuck\App\Api\Controller\JokesController::slackAction

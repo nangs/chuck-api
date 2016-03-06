@@ -1,7 +1,7 @@
 <?php
 
 /**
- * IndexController.php - created Mar 6, 2016 3:03:18 PM
+ * JokesController.php - created Mar 6, 2016 3:03:18 PM
  *
  * @copyright Copyright (c) pinkbigmacmedia
  *
@@ -10,12 +10,12 @@ namespace Chuck\App\Api\Controller;
 
 /**
  *
- * IndexController.php
+ * JokesController.php
  *
  * @package Chuck\App\Api
  *
  */
-class IndexController
+class JokesController
 {
 
     /**
@@ -32,7 +32,12 @@ class IndexController
     {
         $this->setJokeFacade($app['chuck.joke']);
 
-        return new \Symfony\Component\HttpFoundation\Response($this->jokeFacade->random()->getValue());
+        return new \Symfony\Component\HttpFoundation\JsonResponse(
+            [
+                'icon_url' => 'http://api.chucknorris.io/img/avatar/chuck-norris.png',
+                'text'     => $this->jokeFacade->random()->getValue()
+            ]
+        );
     }
 
     /**
@@ -43,5 +48,15 @@ class IndexController
     protected function setJokeFacade(\Chuck\JokeFacade $jokeFacade)
     {
         $this->jokeFacade = $jokeFacade;
+    }
+
+    /**
+     *
+     * @param \Silex\Application $app
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function slackAction(\Silex\Application $app)
+    {
+        return $this->indexAction($app);
     }
 }
