@@ -1,0 +1,7 @@
+# composer
+/vendor
+composer.phar
+
+# git
+.gitnore
+.gitattributes

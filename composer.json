@@ -1,0 +1,14 @@
+{
+   "name"             : "pinkbigmacmedia/chuck-jokes-api",
+   "require"          : {
+      "php"                         : "~5.5",
+      "pinkbigmacmedia/chuck-jokes" : "dev-master",
+      "silex/silex"                 : "1.1",
+      "symfony/config"              : "~3.0",
+      "symfony/yaml"                : "~3.0"
+   },
+   "repositories"     : [ {"type": "vcs", "url": "https://github.com/pinkbigmacmedia/chuck-jokes.git"} ],
+   "autoload"         : { "psr-4":{ "Chuck\\App\\":"src" } },
+   "prefer-stable"    : true,
+   "minimum-stability": "dev"
+}
