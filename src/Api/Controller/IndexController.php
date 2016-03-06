@@ -32,7 +32,10 @@ class IndexController
     {
         $this->setJokeFacade($app['chuck.joke']);
 
-        return new \Symfony\Component\HttpFoundation\Response($this->jokeFacade->random()->getValue());
+        return $app['twig']->render('index.html', [
+            'example_response_id'   => strval($this->jokeFacade->random()->getId()),
+            'example_response_text' => strval($this->jokeFacade->random()->getValue())
+        ]);
     }
 
     /**

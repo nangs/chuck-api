@@ -5,7 +5,8 @@
       "pinkbigmacmedia/chuck-jokes" : "dev-master",
       "silex/silex"                 : "1.1",
       "symfony/config"              : "~3.0",
-      "symfony/yaml"                : "~3.0"
+      "symfony/yaml"                : "~3.0",
+      "twig/twig"                   : "~1.2"
    },
    "repositories"     : [ {"type": "vcs", "url": "https://github.com/pinkbigmacmedia/chuck-jokes.git"} ],
    "autoload"         : { "psr-4":{ "Chuck\\App\\":"src" } },
