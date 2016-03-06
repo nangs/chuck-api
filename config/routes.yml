@@ -3,3 +3,9 @@ api :
     methods  : GET
     defaults :
         _controller: \Chuck\App\Api\Controller\IndexController::indexAction
+
+api.slack :
+    path     : /slack
+    methods  : GET
+    defaults :
+        _controller: \Chuck\App\Api\Controller\IndexController::slackAction

@@ -17,13 +17,47 @@ namespace Chuck\App\Api\Controller;
  */
 class IndexController
 {
+
     /**
      *
-     * @param  \Silex\Application $app
+     * @var \Chuck\JokeFacade
+     */
+    protected $jokeFacade;
+
+    /**
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function slackAction(\Silex\Application $app)
+    {
+        $this->setJokeFacade($app['chuck.joke']);
+
+        return new \Symfony\Component\HttpFoundation\JsonResponse(
+            [
+                'icon_url' => 'http://api.chucknorris.io/img/avatar/chuck-norris.png',
+                'text'     => $this->jokeFacade->random()->getValue()
+            ]
+        );
+    }
+
+    /**
+     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction(\Silex\Application $app)
     {
-        return new \Symfony\Component\HttpFoundation\Response($app['chuck.joke']->random()->getValue());
+        $this->setJokeFacade($app['chuck.joke']);
+
+        return new \Symfony\Component\HttpFoundation\Response($this->jokeFacade->random()->getValue());
+    }
+
+    /**
+     *
+     * @param \Chuck\JokeFacade $jokeFacade
+     * @return void
+     */
+    protected function setJokeFacade(\Chuck\JokeFacade $jokeFacade)
+    {
+        $this->jokeFacade = $jokeFacade;
     }
 }
