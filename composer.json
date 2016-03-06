@@ -1,5 +1,9 @@
 {
    "name"             : "pinkbigmacmedia/chuck-jokes-api",
+   "description"      : "chucknorris.io is a free JSON API for hand curated Chuck Norris facts.",
+   "homepage"         : "http://api.chucknorris.io",
+   "keywords"         : [ "Chuck", "Norris", "Chuck Norris", "Chuck Norris Jokes" ],
+   "license"          : "MIT",
    "require"          : {
       "php"                         : "~5.5",
       "pinkbigmacmedia/chuck-jokes" : "dev-master",
