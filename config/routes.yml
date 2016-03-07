@@ -3,7 +3,6 @@ api :
     methods  : GET
     defaults :
         _controller: \Chuck\App\Api\Controller\IndexController::indexAction
-    schemes:  [https]
 
 jokes:
     prefix    : /jokes/
