@@ -34,7 +34,7 @@ class JokesController
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
-                'icon_url' => 'http://api.chucknorris.io/img/avatar/chuck-norris.png',
+                'icon_url' => 'https://api.chucknorris.io/img/avatar/chuck-norris.png',
                 'text'     => $this->jokeFacade->random()->getValue()
             ]
         );
@@ -57,6 +57,14 @@ class JokesController
      */
     public function slackAction(\Silex\Application $app)
     {
-        return $this->indexAction($app);
+        $this->setJokeFacade($app['chuck.joke']);
+
+        return new \Symfony\Component\HttpFoundation\JsonResponse(
+            [
+                'icon_url' => 'https://api.chucknorris.io/img/avatar/chuck-norris-alt-01.png',
+                'response' => 'in_channel',
+                'text'     => $this->jokeFacade->random()->getValue()
+            ]
+        );
     }
 }
