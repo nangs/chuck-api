@@ -61,9 +61,9 @@ class JokesController
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
-                'icon_url' => 'https://api.chucknorris.io/img/avatar/chuck-norris-alt-01.png',
-                'response' => 'in_channel',
-                'text'     => $this->jokeFacade->random()->getValue()
+                'icon_url'      => 'https://api.chucknorris.io/img/avatar/chuck-norris-alt-01.png',
+                'response_type' => 'in_channel',
+                'text'          => $this->jokeFacade->random()->getValue()
             ]
         );
     }
