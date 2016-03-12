@@ -11,8 +11,8 @@ Chuck Norris facts have spread around the world, leading not only to translated 
 ## Usage
 
 Retrieve a random chuck joke in JSON format:
-```json
-GET [https://api.chucknorris.io/jokes](https://api.chucknorris.io/jokes)
+```
+GET https://api.chucknorris.io/jokes
 ```
 
 Example response:
