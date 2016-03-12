@@ -1,8 +1,8 @@
 # CHUCKNORRIS.IO
 
-JSON API for random [Chuck Norris jokes](http://api.chucknorris.io).
+JSON API for random [Chuck Norris jokes](https://api.chucknorris.io).
 
-chucknorris.io is a free JSON API for hand curated Chuck Norris facts. If you think there is a fact missing drop us a line at info@pinkbigmac.com
+chucknorris.io is a free JSON API for hand curated Chuck Norris facts. If you think there is a fact missing drop us a line at admin@chucknorris.io
 
 Chuck Norris facts are satirical factoids about martial artist and actor Chuck Norris that have become an Internet phenomenon and as a result have become widespread in popular culture. The 'facts' are normally absurd hyperbolic claims about Norris' toughness, attitude, virility, sophistication, and masculinity.
 
@@ -12,7 +12,7 @@ Chuck Norris facts have spread around the world, leading not only to translated 
 
 Retrieve a random chuck joke in JSON format:
 ```json
-GET http://api.chucknorris.io/jokes
+GET [https://api.chucknorris.io/jokes](https://api.chucknorris.io/jokes)
 ```
 
 Example response:
