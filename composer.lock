@@ -4,9 +4,60 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8b8280d568f98ccd91450e9ea9cc7df4",
-    "content-hash": "761c1fdb0171eaacd941239ad0ea612b",
+    "hash": "f94c15cb8a0b98b232352bcb75d7260c",
+    "content-hash": "dd43f08c6b174ec8d06275dd7168369b",
     "packages": [
+        {
+            "name": "chucknorris/lib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chucknorris-io/chuck-lib.git",
+                "reference": "585f244ef333992bc6e678c688908c299dfc9bfd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/585f244ef333992bc6e678c688908c299dfc9bfd",
+                "reference": "585f244ef333992bc6e678c688908c299dfc9bfd",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/dbal": "~2.5",
+                "php": "~5.5.0",
+                "ramsey/uuid": "~3.2",
+                "webmozart/json": "~1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.0.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Chuck\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Chuck\\Test\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mathias Schilling",
+                    "email": "m@matchilling.com"
+                }
+            ],
+            "homepage": "https://api.chucknorris.io/",
+            "support": {
+                "email": "admin@chucknorris.io",
+                "issues": "https://github.com/chucknorris-io/chuck-lib/issues",
+                "source": "https://github.com/chucknorris-io/chuck-lib/tree/master"
+            },
+            "time": "2016-03-12 06:02:43"
+        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.7",
@@ -587,57 +638,6 @@
                 "dependency injection"
             ],
             "time": "2013-11-22 08:30:29"
-        },
-        {
-            "name": "pinkbigmacmedia/chuck-jokes",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/matchilling/chuck-jokes.git",
-                "reference": "59a531a5cb850f1787ecd50913250291b1ef9d50"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/matchilling/chuck-jokes/zipball/59a531a5cb850f1787ecd50913250291b1ef9d50",
-                "reference": "59a531a5cb850f1787ecd50913250291b1ef9d50",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/dbal": "~2.5",
-                "php": "~5.5.0",
-                "ramsey/uuid": "~3.2",
-                "webmozart/json": "~1.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Chuck\\": "src"
-                }
-            },
-            "autoload-dev": {
-                "psr-4": {
-                    "Chuck\\Test\\": "tests"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mathias Schilling",
-                    "email": "info@pinkbigmacmedia.com"
-                }
-            ],
-            "homepage": "http://www.pinkbigmacmedia.com",
-            "support": {
-                "email": "info@pinkbigmacmedia.com",
-                "issues": "https://github.com/pinkbigmacmedia/chuck-jokes/issues",
-                "source": "https://github.com/matchilling/chuck-jokes/tree/master"
-            },
-            "time": "2016-03-11 22:19:41"
         },
         {
             "name": "psr/log",
@@ -1545,7 +1545,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "pinkbigmacmedia/chuck-jokes": 20
+        "chucknorris/lib": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
