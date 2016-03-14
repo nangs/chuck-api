@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chucknorris-io/chuck-lib.git",
-                "reference": "f39d63c6b8c645f9a4d7f9388fd5600a321a30c3"
+                "reference": "55f8555b9336bc3f97001ba0bb4c35aef806b7ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/f39d63c6b8c645f9a4d7f9388fd5600a321a30c3",
-                "reference": "f39d63c6b8c645f9a4d7f9388fd5600a321a30c3",
+                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/55f8555b9336bc3f97001ba0bb4c35aef806b7ce",
+                "reference": "55f8555b9336bc3f97001ba0bb4c35aef806b7ce",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "issues": "https://github.com/chucknorris-io/chuck-lib/issues",
                 "source": "https://github.com/chucknorris-io/chuck-lib/tree/master"
             },
-            "time": "2016-03-14 00:00:13"
+            "time": "2016-03-14 10:36:56"
         },
         {
             "name": "doctrine/annotations",
@@ -1097,21 +1097,22 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.3.38",
+            "version": "v2.3.39",
             "target-dir": "Symfony/Component/HttpFoundation",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "bf31ec3518fe9f1c5429cd8837231b7be3766878"
+                "reference": "f5cd42d4895d9ede5d26cb1b2883dd4f7e455a40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/bf31ec3518fe9f1c5429cd8837231b7be3766878",
-                "reference": "bf31ec3518fe9f1c5429cd8837231b7be3766878",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/f5cd42d4895d9ede5d26cb1b2883dd4f7e455a40",
+                "reference": "f5cd42d4895d9ede5d26cb1b2883dd4f7e455a40",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.3",
+                "symfony/polyfill-mbstring": "~1.1"
             },
             "type": "library",
             "extra": {
@@ -1146,21 +1147,21 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-26 05:44:02"
+            "time": "2016-03-12 16:03:08"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v2.3.38",
+            "version": "v2.3.39",
             "target-dir": "Symfony/Component/HttpKernel",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "36bfede8af384fbeb49eae30a5568efa935bfc6a"
+                "reference": "a704146970a1ff261c05e865b636bcc5d95f1b5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/36bfede8af384fbeb49eae30a5568efa935bfc6a",
-                "reference": "36bfede8af384fbeb49eae30a5568efa935bfc6a",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/a704146970a1ff261c05e865b636bcc5d95f1b5b",
+                "reference": "a704146970a1ff261c05e865b636bcc5d95f1b5b",
                 "shasum": ""
             },
             "require": {
@@ -1222,7 +1223,66 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-28 18:24:04"
+            "time": "2016-03-13 16:38:02"
+        },
+        {
+            "name": "symfony/polyfill-mbstring",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/polyfill-mbstring.git",
+                "reference": "1289d16209491b584839022f29257ad859b8532d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/1289d16209491b584839022f29257ad859b8532d",
+                "reference": "1289d16209491b584839022f29257ad859b8532d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "suggest": {
+                "ext-mbstring": "For best performance"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony polyfill for the Mbstring extension",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "mbstring",
+                "polyfill",
+                "portable",
+                "shim"
+            ],
+            "time": "2016-01-20 09:13:37"
         },
         {
             "name": "symfony/routing",
