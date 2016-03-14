@@ -5,5 +5,5 @@ api :
         _controller: \Chuck\App\Api\Controller\IndexController::indexAction
 
 jokes:
-    prefix    : /jokes/
-    resource  : routes/jokes.yml
+    prefix   : /jokes/
+    resource : routes/jokes.yml

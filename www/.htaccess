@@ -8,6 +8,17 @@
 # Some cloud hosting services require RewriteBase to be set: goo.gl/HOcPN
 # If using the h5bp in a subdirectory, use `RewriteBase /foo` instead where 'foo' is your directory.
 
+##Force SSL 
+
+#Normal way (in case you need to deploy to NON-heroku)
+RewriteCond %{HTTPS} !=on
+
+#Heroku way
+RewriteCond %{HTTP:X-Forwarded-Proto} !https 
+
+#If neither above conditions are met, redirect to https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 <IfModule mod_rewrite.c>
   Options +FollowSymlinks
   RewriteEngine On
