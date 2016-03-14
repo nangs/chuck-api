@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="google-site-verification" content="KSDmg43NwzWZj2DP9-cuzKEONcIZqW_cV_331SMUFYw" />
+        <link type="text/css" rel="stylesheet" media="all" href="/css/main.css" />
+        <link href='https://fonts.googleapis.com/css?family=Teko:300,600' rel='stylesheet' type='text/css'>
+        {% block head %}
+            <title>Chuck Norris Jokes Api</title>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="wrapper">
+            <header>
+                <a href="/">
+                    <h1>chuck <img alt="Chuck Norris Jokes Api" src="/img/chuck-norris-logo.jpg"> norris.io</h1>
+                    <h2>JSON API for random Chuck Norris jokes</h2>
+                </a>
+            </header>
+            <div id="content">{% block content %}{% endblock %}</div>
+            <footer>
+                <small class="disclaimer">chucknorris.io is free and will always be</small>
+                <a class="btn follow twitter" href="http://twitter.com/MatChilling" target="_blank"><i></i><span>Twitter</span></a>
+                <a class="btn follow github" href="https://github.com/chucknorris-io" target="_blank"><i></i><span>GitHub</span></a>
+                <a class="btn follow homepage" href="http://www.pinkbigmacmedia.com" target="_blank"><i></i><span></span></a>
+                <small class="contribution">
+                    <b>Attribution:</b>
+                    Artwork "Dancing Chuck" by <a href="http://jesgrad07.deviantart.com/" target="_blank">jesgrad07</a>,<br>
+                    Iconography by <a href="http://pulleasy.deviantart.com/" target="_blank">Daniel Puglisi</a>
+               </small>
+           </footer>
+        </div>
+        
+        <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        
+           ga('create', 'UA-74778607-1', 'auto');
+           ga('send', 'pageview');
+        </script>
+    </body>
+</html>

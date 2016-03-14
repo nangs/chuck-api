@@ -17,6 +17,11 @@ namespace Chuck\App\Api;
  */
 class ServicesLoader implements \Silex\ServiceProviderInterface
 {
+    /**
+     *
+     * @var \Silex\Application
+     */
+    protected $app;
 
     /**
      * Bootstraps the application.
@@ -43,13 +48,12 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
      */
     public function register(\Silex\Application $app)
     {
-        $app['chuck.joke'] = $app->share(
-            function (\Silex\Application $app) {
+        $this->app = $app;
+
+        $this->app['chuck.joke'] = $this->app->share(
+            function () {
                 return new \Chuck\JokeFacade(
-                    new \Chuck\Broker\Joke(
-                        new \Chuck\Database('fromEnv'),
-                        new \Webmozart\Json\JsonDecoder()
-                    )
+                    new \Chuck\Broker\Joke(new \Chuck\Database('fromEnv'), new \Webmozart\Json\JsonDecoder())
                 );
             }
         );

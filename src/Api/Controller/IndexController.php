@@ -32,9 +32,12 @@ class IndexController
     {
         $this->setJokeFacade($app['chuck.joke']);
 
+        $joke = $this->jokeFacade->random();
+
         return $app['twig']->render('index.html', [
-            'example_response_id'   => strval($this->jokeFacade->random()->getId()),
-            'example_response_text' => strval($this->jokeFacade->random()->getValue())
+            'example_response_id'   => strval($joke->getId()),
+            'example_response_text' => strval($joke->getValue()),
+            'example_response_url'  => $app['url_generator']->generate('api.get_joke', ['id' => $joke->getId()])
         ]);
     }
 

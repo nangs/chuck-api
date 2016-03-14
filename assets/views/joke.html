@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>{{ page_title }} - Chuck Norris Jokes Api</title>
+    <meta content="{{ current_joke.value }}" name="description" />
+    <link rel="canonical" href="{{ current_joke.url }}" />
+    <meta name="robots" content="index, follow" />
+{% endblock %}
+
+{% block content %}
+    <section>
+        <blockquote><p>{{ current_joke.value }}</p></blockquote>
+        <a href="{{ previous_joke.url }}" id="previous_joke_url" title="{{ previous_joke.title }}">Prev</a>
+        <a href="{{ next_joke.url }}" id="next_joke_url" title="{{ next_joke.title }}">Next</a>
+    </section>
+    
+    <script>
+    document.onkeydown = function(e) {
+        switch (e.keyCode) {
+            case 37:
+                // Left arrow
+                window.location = document.getElementById('previous_joke_url').href;
+                break;
+            case 39:
+                // Right arrow
+                window.location = document.getElementById('next_joke_url').href;
+                break;
+        }
+    };
+    </script>
+{% endblock %}

@@ -28,7 +28,8 @@ $app->extend('routes', function (
 });
 
 $app->register(new \Chuck\App\Api\ServicesLoader());
-$app->register(new Silex\Provider\TwigServiceProvider(), [
+$app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path'    => __DIR__ . '/../assets/views/'
 ]);
 

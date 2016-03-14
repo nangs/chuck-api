@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chucknorris-io/chuck-lib.git",
-                "reference": "585f244ef333992bc6e678c688908c299dfc9bfd"
+                "reference": "f39d63c6b8c645f9a4d7f9388fd5600a321a30c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/585f244ef333992bc6e678c688908c299dfc9bfd",
-                "reference": "585f244ef333992bc6e678c688908c299dfc9bfd",
+                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/f39d63c6b8c645f9a4d7f9388fd5600a321a30c3",
+                "reference": "f39d63c6b8c645f9a4d7f9388fd5600a321a30c3",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "issues": "https://github.com/chucknorris-io/chuck-lib/issues",
                 "source": "https://github.com/chucknorris-io/chuck-lib/tree/master"
             },
-            "time": "2016-03-12 06:02:43"
+            "time": "2016-03-14 00:00:13"
         },
         {
             "name": "doctrine/annotations",
@@ -991,17 +991,17 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.3.38",
+            "version": "v2.3.39",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
-                "reference": "011c727163ccc251b315d09d11558acf711fce32"
+                "reference": "b2d9d812e21d6e00983061d49ee61a82f54cace7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/011c727163ccc251b315d09d11558acf711fce32",
-                "reference": "011c727163ccc251b315d09d11558acf711fce32",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/b2d9d812e21d6e00983061d49ee61a82f54cace7",
+                "reference": "b2d9d812e21d6e00983061d49ee61a82f54cace7",
                 "shasum": ""
             },
             "require": {
@@ -1044,7 +1044,7 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2016-01-25 17:00:36"
+            "time": "2016-03-04 07:12:06"
         },
         {
             "name": "symfony/filesystem",
@@ -1226,17 +1226,17 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v2.3.38",
+            "version": "v2.3.39",
             "target-dir": "Symfony/Component/Routing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "32ada20e2a1beac1eb244e9b27017649e7179a57"
+                "reference": "9f464f27cb127232f5c32d5a736fe769e5249442"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/32ada20e2a1beac1eb244e9b27017649e7179a57",
-                "reference": "32ada20e2a1beac1eb244e9b27017649e7179a57",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/9f464f27cb127232f5c32d5a736fe769e5249442",
+                "reference": "9f464f27cb127232f5c32d5a736fe769e5249442",
                 "shasum": ""
             },
             "require": {
@@ -1284,7 +1284,7 @@
             ],
             "description": "Symfony Routing Component",
             "homepage": "https://symfony.com",
-            "time": "2016-02-03 18:52:07"
+            "time": "2016-03-04 07:12:06"
         },
         {
             "name": "symfony/yaml",
