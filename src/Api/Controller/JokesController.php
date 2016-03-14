@@ -121,9 +121,16 @@ class JokesController
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
-                'icon_url'      => 'https://api.chucknorris.io/img/avatar/chuck-norris-alt-01.png',
+                'icon_url' => 'https://api.chucknorris.io/img/avatar/chuck-norris.png',
                 'response_type' => 'in_channel',
                 'text'          => $this->jokeFacade->random()->getValue()
+            ],
+            200,
+            [
+                'Access-Control-Allow-Origin'      => '*',
+                'Access-Control-Allow-Credentials' => 'true',
+                'Access-Control-Allow-Methods'     => 'GET, HEAD',
+                'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
             ]
         );
     }
