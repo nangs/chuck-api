@@ -3,7 +3,7 @@
    "description"      : "chucknorris.io is a free JSON API for hand curated Chuck Norris facts.",
    "homepage"         : "https://api.chucknorris.io",
    "keywords"         : [ "Chuck", "Norris", "Chuck Norris", "Chuck Norris Jokes" ],
-   "license"          : "MIT",
+   "license"          : "GPL-3.0+",
    "require"          : {
       "php"             : "~5.5",
       "chucknorris/lib" : "dev-master",
