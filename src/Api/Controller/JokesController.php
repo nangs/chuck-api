@@ -70,7 +70,7 @@ class JokesController
      * @param  \Silex\Application $app
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function indexAction(\Silex\Application $app)
+    public function randomAction(\Silex\Application $app)
     {
         $this->setJokeFacade($app['chuck.joke']);
 

@@ -18,7 +18,7 @@ beard, and his role in the action television series Walker, Texas Ranger.
 
 Retrieve a random chuck joke in JSON format:
 ```
-GET https://api.chucknorris.io/jokes
+GET https://api.chucknorris.io/jokes/random
 ```
 
 Example response:

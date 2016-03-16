@@ -1,8 +1,8 @@
 api.joke_random :
-    path     : /
+    path     : /random
     methods  : GET
     defaults :
-        _controller: \Chuck\App\Api\Controller\JokesController::indexAction
+        _controller: \Chuck\App\Api\Controller\JokesController::randomAction
 
 api.joke_slack :
     path     : /slack

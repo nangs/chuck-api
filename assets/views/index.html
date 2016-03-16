@@ -15,11 +15,11 @@
     <section>
         <h3>Usage</h3>
         <p>Retrieve a random chuck joke in JSON format.</p>
-        <code class="request get"><a title="Retrieve a random chuck norris joke in JSON format." href="/jokes">https://api.chucknorris.io/jokes</a></code>
+        <code class="request get"><a title="Retrieve a random chuck norris joke in JSON format." href="/jokes/random">https://api.chucknorris.io/jokes/random</a></code>
         <p>Example response:</p>
         <code class="response">
             {<br>
-                "icon_url" : "<span id="response_icon_url">https://api.chucknorris.io/img/avatar/chuck-norris.png</span>",<br>
+                "icon_url" : "<span id="response_icon_url">{{ example_response_icon_url }}</span>",<br>
                 "id" : "<span id="response_id">{{ example_response_id }}</span>",<br>
                 "value" : "<a href="{{ example_response_url }}" id="response_text">{{ example_response_text }}</a>"<br>
             }
