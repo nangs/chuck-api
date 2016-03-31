@@ -63,12 +63,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chucknorris-io/chuck-lib.git",
-                "reference": "5d1a55de0f250e81b4f44ad6f8e985c685c0db0c"
+                "reference": "2791de9e2600256bdfd6fb2e43b9fecd123491ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/5d1a55de0f250e81b4f44ad6f8e985c685c0db0c",
-                "reference": "5d1a55de0f250e81b4f44ad6f8e985c685c0db0c",
+                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/2791de9e2600256bdfd6fb2e43b9fecd123491ae",
+                "reference": "2791de9e2600256bdfd6fb2e43b9fecd123491ae",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
                 "issues": "https://github.com/chucknorris-io/chuck-lib/issues",
                 "source": "https://github.com/chucknorris-io/chuck-lib/tree/master"
             },
-            "time": "2016-03-15 09:43:38"
+            "time": "2016-03-31 23:15:21"
         },
         {
             "name": "doctrine/annotations",

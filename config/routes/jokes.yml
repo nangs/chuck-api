@@ -8,7 +8,7 @@ api.joke_slack :
     path     : /slack
     methods  : [ GET, POST ]
     defaults :
-        _controller: \Chuck\App\Api\Controller\JokesController::slackAction
+        _controller: \Chuck\App\Api\Controller\Jokes\SlackController::indexAction
         
 api.get_joke :
     path     : /{id}

@@ -32,21 +32,17 @@ class SlackController
 
     /**
      *
-     * @var \Symfony\Component\HttpFoundation\Request
-     */
-    protected $request;
-
-    /**
-     *
-     * @param  \Silex\Application $app
+     * @param  \Silex\Application                        $app
+     * @param  \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function connectAction(\Silex\Application $app)
-    {
+    public function connectAction(
+        \Silex\Application $app,
+        \Symfony\Component\HttpFoundation\Request $request
+    ) {
         $this->config = json_decode(getenv('SLACK_AUTH'));
-        $this->setRequest($app['request']);
 
-        if ($code = $this->request->get('code', null)) {
+        if ($code = $request->get('code', null)) {
             $provider = self::getAuthProvider($app['url_generator']);
 
             $response = $provider->getResourceOwner(
@@ -142,15 +138,5 @@ class SlackController
         }
 
         return self::$config = json_decode($slackAuth);
-    }
-
-    /**
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return void
-     */
-    protected function setRequest(\Symfony\Component\HttpFoundation\Request $request)
-    {
-        $this->request = $request;
     }
 }

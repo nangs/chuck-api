@@ -17,21 +17,17 @@ namespace Chuck\App\Api\Controller;
  */
 class IndexController
 {
-
     /**
      *
-     * @var \Chuck\JokeFacade
-     */
-    protected $jokeFacade;
-
-    /**
-     *
+     * @param  \Silex\Application                        $app
+     * @param  \Symfony\Component\HttpFoundation\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(\Silex\Application $app)
-    {
-        $this->setJokeFacade($app['chuck.joke']);
-        $joke = $this->jokeFacade->random();
+    public function indexAction(
+        \Silex\Application $app,
+        \Symfony\Component\HttpFoundation\Request $request
+    ) {
+        $joke = $app['chuck.joke']->random();
 
         return $app['twig']->render(
             'index.html',
@@ -50,15 +46,5 @@ class IndexController
                 )
             ]
         );
-    }
-
-    /**
-     *
-     * @param \Chuck\JokeFacade $jokeFacade
-     * @return void
-     */
-    protected function setJokeFacade(\Chuck\JokeFacade $jokeFacade)
-    {
-        $this->jokeFacade = $jokeFacade;
     }
 }
