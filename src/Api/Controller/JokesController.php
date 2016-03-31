@@ -26,6 +26,12 @@ class JokesController
 
     /**
      *
+     * @var \Monolog\Logger
+     */
+    protected $logger;
+
+    /**
+     *
      * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
@@ -73,6 +79,7 @@ class JokesController
     public function randomAction(\Silex\Application $app)
     {
         $this->setJokeFacade($app['chuck.joke']);
+        $this->setRequest($app['request']);
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
@@ -101,6 +108,17 @@ class JokesController
     }
 
     /**
+     * Set the logger
+     *
+     * @param \Monolog\Logger $logger
+     * @return void
+     */
+    protected function setLogger(\Monolog\Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+
+    /**
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @return void
@@ -118,12 +136,39 @@ class JokesController
     public function slackAction(\Silex\Application $app)
     {
         $this->setJokeFacade($app['chuck.joke']);
+        $this->setLogger($app['monolog']);
+        $this->setRequest($app['request']);
+
+        $joke = $this->jokeFacade->random();
+        $this->logger->addInfo(
+            json_encode([
+                'type'      => 'slack_command',
+                'reference' => $this->request->headers->get('HTTP_X_REQUEST_ID', \Chuck\Util::createSlugUuid()),
+                'meta'      => [
+                    'request'  => [
+                        'token'        => $this->request->get('token'),
+                        'team_id'      => $this->request->get('team_id'),
+                        'team_domain'  => $this->request->get('team_domain'),
+                        'channel_id'   => $this->request->get('channel_id'),
+                        'channel_name' => $this->request->get('channel_name'),
+                        'user_id'      => $this->request->get('user_id'),
+                        'user_name'    => $this->request->get('user_name'),
+                        'command'      => $this->request->get('command'),
+                        'text'         => $this->request->get('text'),
+                        'response_url' => $this->request->get('response_url')
+                    ],
+                    'response' => [
+                        'joke_id' => $joke->getId()
+                    ]
+                ]
+            ])
+        );
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
-                'icon_url' => 'https://api.chucknorris.io/img/avatar/chuck-norris.png',
+                'icon_url'      => 'https://api.chucknorris.io/img/avatar/chuck-norris.png',
                 'response_type' => 'in_channel',
-                'text'          => $this->jokeFacade->random()->getValue()
+                'text'          => $joke->getValue()
             ],
             200,
             [
