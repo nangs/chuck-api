@@ -32,7 +32,7 @@ $app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path'    => __DIR__ . '/../assets/views/'
 ]);
-$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
+$app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) {
         return sprintf('/%s', ltrim($asset, '/'));
     }));

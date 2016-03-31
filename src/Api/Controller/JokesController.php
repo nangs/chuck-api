@@ -10,7 +10,7 @@ namespace Chuck\App\Api\Controller;
 
 /**
  *
- * JokesController.php
+ * JokesController
  *
  * @package Chuck\App\Api
  *

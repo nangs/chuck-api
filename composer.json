@@ -5,12 +5,13 @@
    "keywords"         : [ "Chuck", "Norris", "Chuck Norris", "Chuck Norris Jokes" ],
    "license"          : "GPL-3.0+",
    "require"          : {
-      "php"             : "~5.5",
-      "chucknorris/lib" : "dev-master",
-      "silex/silex"     : "1.1",
-      "symfony/config"  : "~3.0",
-      "symfony/yaml"    : "~3.0",
-      "twig/twig"       : "~1.2"
+      "php"                      : "~5.5",
+      "bramdevries/oauth2-slack" : "~0.1",
+      "chucknorris/lib"          : "dev-master",
+      "silex/silex"              : "1.1",
+      "symfony/config"           : "~3.0",
+      "symfony/yaml"             : "~3.0",
+      "twig/twig"                : "~1.2"
    },
    "repositories"     : [
         { "type": "vcs", "url": "git@github.com:chucknorris-io/chuck-lib.git" }

@@ -6,7 +6,7 @@ api.joke_random :
 
 api.joke_slack :
     path     : /slack
-    methods  : GET
+    methods  : [ GET, POST ]
     defaults :
         _controller: \Chuck\App\Api\Controller\JokesController::slackAction
         

@@ -4,6 +4,10 @@ api :
     defaults :
         _controller: \Chuck\App\Api\Controller\IndexController::indexAction
 
+connect:
+    prefix   : /connect/
+    resource : routes/connect.yml
+
 jokes:
     prefix   : /jokes/
     resource : routes/jokes.yml
