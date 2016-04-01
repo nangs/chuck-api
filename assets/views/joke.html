@@ -9,9 +9,10 @@
 
 {% block content %}
     <section>
-        <blockquote><p>{{ current_joke.value }}</p></blockquote>
         <a href="{{ previous_joke.url }}" id="previous_joke_url" title="{{ previous_joke.title }}">Prev</a>
         <a href="{{ next_joke.url }}" id="next_joke_url" title="{{ next_joke.title }}">Next</a>
+        <blockquote><p>{{ current_joke.value }}</p></blockquote>
+        <i><small>You can use the left and right keys on your keyboard to navigate!</small></i>
     </section>
     
     <script>
