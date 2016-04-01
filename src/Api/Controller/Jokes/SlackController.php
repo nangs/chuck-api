@@ -21,12 +21,12 @@ class SlackController
 
     /**
      *
-     * @param  \Chuck\Entity\Joke                        $joke
+     * @param  string $text
      * @param  \Symfony\Component\HttpFoundation\Request $request
      * @return void
      */
     protected function doLogging(
-        \Chuck\Entity\Joke                        $joke,
+        $text,
         \Symfony\Component\HttpFoundation\Request $request
     ) {
         $this->logInfo(
@@ -47,10 +47,26 @@ class SlackController
                         'response_url' => $request->get('response_url')
                     ],
                     'response' => [
-                        'joke_id' => $joke->getId()
+                        'text' => $text
                     ]
                 ]
             ])
+        );
+    }
+
+    /**
+     *
+     * @param \Chuck\JokeFacade $jokeFacade
+     * @return string
+     */
+    protected function getCategoriesText(\Chuck\JokeFacade $jokeFacade)
+    {
+        $categoryNames = array_column($jokeFacade->getCategories(), 'name');
+        asort($categoryNames);
+
+        return sprintf(
+            'Available categories are: `%s`.',
+            implode('`, `', $categoryNames)
         );
     }
 
@@ -64,20 +80,29 @@ class SlackController
         \Silex\Application $app,
         \Symfony\Component\HttpFoundation\Request $request
     ) {
+        $text = null;
         $this->setLogger($app['monolog']);
 
-        if ('-cat' === $request->get('text')) {
-            $categoryNames = array_column($app['chuck.joke']->getCategories(), 'name');
-            asort($categoryNames);
+        if (! empty($userText = $request->get('text'))) {
 
-            $text = sprintf(
-                'Available categories are: `%s`.',
-                implode('`, `', $categoryNames)
-            );
+            if ('-cat' === $userText) {
+                $text = $this->getCategoriesText($app['chuck.joke']);
+            } else {
+                $joke = $app['chuck.joke']->random($userText);
+                $text = null != $joke->getValue()
+                    ? $joke->getValue()
+                    : sprintf(
+                        'Sorry dude, no jokes found for the given category ("%s"). Type `-cat` to see available ones.',
+                        $userText
+                      );
+            }
+
         } else {
-            $this->doLogging($joke = $app['chuck.joke']->random(), $request);
+            $joke = $app['chuck.joke']->random();
             $text = $joke->getValue();
         }
+
+        $this->doLogging($text, $request);
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
