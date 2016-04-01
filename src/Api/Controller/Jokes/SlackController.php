@@ -65,13 +65,26 @@ class SlackController
         \Symfony\Component\HttpFoundation\Request $request
     ) {
         $this->setLogger($app['monolog']);
-        $this->doLogging($joke = $app['chuck.joke']->random(), $request);
+
+        if ('-cat' === $request->get('text')) {
+            $categoryNames = array_column($app['chuck.joke']->getCategories(), 'name');
+            asort($categoryNames);
+
+            $text = sprintf(
+                'Available categories are: `%s`.',
+                implode('`, `', $categoryNames)
+            );
+        } else {
+            $this->doLogging($joke = $app['chuck.joke']->random(), $request);
+            $text = $joke->getValue();
+        }
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
                 'icon_url'      => 'https://api.chucknorris.io/img/avatar/chuck-norris.png',
                 'response_type' => 'in_channel',
-                'text'          => $joke->getValue()
+                'text'          => $text,
+                'mrkdwn'        => true
             ],
             200,
             [
