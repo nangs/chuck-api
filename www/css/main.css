@@ -67,12 +67,30 @@ h3 {
 }
 
 code {
+	white-space: normal;
+	padding: 0;
+}
+
+code.red {
+	color: #a71d5d;
+}
+
+code.quoted:before {
+    content: '`';
+}
+
+code.quoted:after {
+    content: '`';
+}
+
+pre {
 	background: #fff;
 	border: 1px solid #d8d8d8;
 	display: block;
 	font-size: 13px;
 	margin-bottom: 2em;
 	padding: 1em;
+	white-space: normal;
 }
 
 code a#response_text {
@@ -204,19 +222,19 @@ footer .dance-baby-dance {
 }
 
 .alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
 }
 
 .alert-success {
-    color: #3c763d;
-    background-color: #dff0d8;
-    border-color: #d6e9c6;
+	color: #3c763d;
+	background-color: #dff0d8;
+	border-color: #d6e9c6;
 }
 
 .alert-error {
-    color: #a94442;
-    background-color: #f2dede;
-    border-color: #ebccd1;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
 }

@@ -40,7 +40,7 @@ class SlackController
         \Silex\Application $app,
         \Symfony\Component\HttpFoundation\Request $request
     ) {
-        $this->config = json_decode(getenv('SLACK_AUTH'));
+        self::$config = json_decode(getenv('SLACK_AUTH'));
 
         if ($code = $request->get('code', null)) {
             $provider = self::getAuthProvider($app['url_generator']);
@@ -56,8 +56,10 @@ class SlackController
             return $app['twig']->render(
                 'message.html',
                 [
-                    'page_title' => $msg = 'App successfully installed on slack.',
-                    'message'    => [ 'type'  => 'success', 'value' => $msg ]
+                    'page_title' => 'The app was successfully installed for your Slack team.',
+                    'message'    => [
+                        'type'  => 'success',
+                        'value' => 'Congrats! The app was successfully installed for your Slack team.' ]
                 ]
             );
         }

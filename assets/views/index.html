@@ -16,8 +16,9 @@
     <section>
         <h3>Usage</h3>
         <p>Retrieve a random chuck joke in JSON format.</p>
-        <code class="request get"><a title="Retrieve a random chuck norris joke in JSON format." href="/jokes/random">https://api.chucknorris.io/jokes/random</a></code>
+        <pre><code class="request get"><a title="Retrieve a random chuck norris joke in JSON format." href="/jokes/random">https://api.chucknorris.io/jokes/random</a></code></pre>
         <p>Example response:</p>
+        <pre>
         <code class="response">
             {<br>
                 "icon_url" : "<span id="response_icon_url">{{ example_response_icon_url }}</span>",<br>
@@ -25,18 +26,19 @@
                 "value" : "<a href="{{ example_response_url }}" id="response_text">{{ example_response_text }}</a>"<br>
             }
         </code>
+        </pre>
         <a href="#!" id="get_random_joke" onclick="getJoke()">Get me a new one ...</a> <small>(press "r" to refresh)</small>
     </section>
     <section id="slack">
         <h3>Slack integration</h3>
         <p>The Chuck Norris app existed even before the slack existed.</p>
-        <p>Install this app and retrieve random Chuck Norris facts by just typing `/chuck` into your slack console.</p>
+        <p>Install this app and retrieve random Chuck Norris facts by just typing <code class="quoted red">/chuck</code> into your slack console. Additionally you can type <code class="quoted red">/chuck {category_name}</code> to retrieve a random joke from a given category. Type <code class="quoted red">/chuck -cat</code> to show a list of all available categories.</p>
         <a href="{{ slack_url }}" rel="nofollow">
-            <img alt="Add to Slack" height="40" width="139" src="https://platform.slack-edge.com/img/add_to_slack.png" srcset="https://platform.slack-edge.com/img/add_to_slack.png 1x, https://platform.slack-edge.com/img/add_to_slack@2x.png 2x" />
+            <img alt="Add to Slack" height="40" width="139" src="{{ asset('/img/add-to-slack-btn.png') }}"/>
         </a>
         <p><small>Installation takes just 1 minute!</small></p>
         <p>
-            <small><b>Privacy:</b> All we're storing are team and user ids and the appropriate OAuth tokens. This allows you to post these awesome Chuck Norris facts on slack on the appropriate channel. Our applications is hosted on https://aws.amazon.com/privacy. We use a secure connection between slack servers and aws. We anonymously keep track of three data points; total # of teams, total # unique users, and total # of dones. Any question about privacy tweet @matchilling or email m@matchilling.com</small>
+            <small><b>Privacy:</b> The app is just fun. All we're storing are team and user ids and the appropriate OAuth tokens. This allows you to post these awesome Chuck Norris facts on slack on the appropriate channel. Our applications is hosted on https://aws.amazon.com/privacy. We use a secure connection between slack servers and aws. We anonymously keep track of three data points; total number of teams and total number of unique users. Any question about privacy tweet @matchilling or email m@matchilling.com</small>
         </p>
     </section>
 
