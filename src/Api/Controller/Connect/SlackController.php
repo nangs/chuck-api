@@ -17,6 +17,7 @@ namespace Chuck\App\Api\Controller\Connect;
  */
 class SlackController
 {
+    use \Chuck\Util\LoggerTrait;
 
     /**
      *
@@ -40,6 +41,7 @@ class SlackController
         \Silex\Application $app,
         \Symfony\Component\HttpFoundation\Request $request
     ) {
+        $this->setLogger($app['monolog']);
         self::$config = json_decode(getenv('SLACK_AUTH'));
 
         if ($code = $request->get('code', null)) {
@@ -52,6 +54,21 @@ class SlackController
             $resourceOwner = $response instanceof \Bramdevries\Oauth\Client\Provider\ResourceOwner
                 ? $response->toArray()
                 : [];
+
+            $this->logInfo(
+                json_encode([
+                    'type'      => 'slack_connect',
+                    'reference' => $request->headers->get('HTTP_X_REQUEST_ID', \Chuck\Util::createSlugUuid()),
+                    'meta'      => [
+                        'resource_owner'  => [
+                            'team_domain' => $resourceOwner['team'],
+                            'team_id'     => $resourceOwner['team_id'],
+                            'user_id'     => $resourceOwner['user_id'],
+                            'user_name'   => $resourceOwner['user']
+                        ]
+                    ]
+                ])
+            );
 
             return $app['twig']->render(
                 'message.html',
