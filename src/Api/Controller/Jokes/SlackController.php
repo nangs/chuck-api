@@ -91,19 +91,30 @@ class SlackController
         if (! empty($userText = $request->get('text'))) {
 
             if (strpos($userText, '-cat') !== false) {
-
                 $text = strpos($userText, '--count') !== false
                     ? $this->getCategoriesText($app['chuck.joke'], true)
                     : $this->getCategoriesText($app['chuck.joke']);
 
             } else {
-                $joke = $app['chuck.joke']->random($userText);
-                $text = null != $joke->getValue()
-                    ? $joke->getValue()
-                    : sprintf(
+                $joke = $app['chuck.joke']->random(
+                    preg_replace('\w+(?:-\w+)+', '' , $userText)
+                );
+
+                if ($joke->getValue()) {
+                    $text = strpos($userText, '--id') !== false
+                        ? sprintf(
+                            '%s `[ joke_id: %s ]`',
+                            $joke->getValue(),
+                            $joke->getId()
+                          )
+                        : $joke->getValue();
+
+                } else {
+                    $text = sprintf(
                         'Sorry dude, no jokes found for the given category ("%s"). Type `-cat` to see available ones.',
                         $userText
-                      );
+                    );
+                }
             }
 
         } else {
