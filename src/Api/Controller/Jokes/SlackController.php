@@ -59,15 +59,20 @@ class SlackController
      * @param \Chuck\JokeFacade $jokeFacade
      * @return string
      */
-    protected function getCategoriesText(\Chuck\JokeFacade $jokeFacade)
+    protected function getCategoriesText(\Chuck\JokeFacade $jokeFacade, $showCount = false)
     {
-        $categoryNames = array_column($jokeFacade->getCategories(), 'name');
-        asort($categoryNames);
+        $response = null;
+        foreach ($categories = $jokeFacade->getCategories() as $category) {
+            $response[] = $showCount
+                ? sprintf('%s (%d)', $category['name'], $category['count'])
+                : $category['name'];
+        }
 
-        return sprintf(
-            'Available categories are: `%s`.',
-            implode('`, `', $categoryNames)
-        );
+        if (! $showCount) {
+            asort($response);
+        }
+
+        return sprintf('Available categories are: `%s`.', implode('`, `', $response));
     }
 
     /**
@@ -85,8 +90,12 @@ class SlackController
 
         if (! empty($userText = $request->get('text'))) {
 
-            if ('-cat' === $userText) {
-                $text = $this->getCategoriesText($app['chuck.joke']);
+            if (strpos($userText, '-cat') !== false) {
+
+                $text = strpos($userText, '--count') !== false
+                    ? $this->getCategoriesText($app['chuck.joke'], true)
+                    : $this->getCategoriesText($app['chuck.joke']);
+
             } else {
                 $joke = $app['chuck.joke']->random($userText);
                 $text = null != $joke->getValue()
