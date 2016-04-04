@@ -135,7 +135,7 @@ blockquote p {
 footer:before {
 	content: "fs";
 	display: inline-block;
-	background-image: url("/img/chuck-norris-dancing.gif");
+	background-image: url("https://assets.chucknorris.host/img/chuck-norris-dancing.gif");
 	height: 50px;
 	width: 50px;
 }

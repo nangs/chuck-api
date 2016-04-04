@@ -44,7 +44,7 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
 ]);
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) {
-        return sprintf('/%s', ltrim($asset, '/'));
+        return sprintf('https://assets.chucknorris.host/%s', ltrim($asset, '/'));
     }));
     return $twig;
 }));

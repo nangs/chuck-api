@@ -74,7 +74,7 @@ class JokesController
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
-                'icon_url' => 'https://api.chucknorris.io/img/avatar/chuck-norris.png',
+                'icon_url' => 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
                 'id'       => $joke->getId(),
                 'value'    => $joke->getValue()
             ],
