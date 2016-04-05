@@ -76,7 +76,8 @@ class SlackController
                     'page_title' => 'The app was successfully installed for your Slack team.',
                     'message'    => [
                         'type'  => 'success',
-                        'value' => 'Congrats! The app was successfully installed for your Slack team.' ]
+                        'value' => 'Congrats! The app was successfully installed for your Slack team and you\'re ready'
+                        . ' to laugh. Start by typing \'\chuck\' into your Slack console.' ]
                 ]
             );
         }
