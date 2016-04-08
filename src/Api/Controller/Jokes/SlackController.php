@@ -96,17 +96,19 @@ class SlackController
                     : $this->getCategoriesText($app['chuck.joke']);
 
             } else {
+
+                $showId = strpos($userText, '--id') !== false;
+                if ($showId) {
+                    $userText = preg_replace('#(--id)#', '' , $userText);
+                }
+
                 $joke = $app['chuck.joke']->random(
-                    preg_replace('\w+(?:-\w+)+', '' , $userText)
+                    preg_replace('/\s+/', '' , $userText)
                 );
 
                 if ($joke->getValue()) {
-                    $text = strpos($userText, '--id') !== false
-                        ? sprintf(
-                            '%s `[ joke_id: %s ]`',
-                            $joke->getValue(),
-                            $joke->getId()
-                          )
+                    $text = $showId
+                        ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
                         : $joke->getValue();
 
                 } else {
@@ -116,7 +118,6 @@ class SlackController
                     );
                 }
             }
-
         } else {
             $joke = $app['chuck.joke']->random();
             $text = $joke->getValue();
