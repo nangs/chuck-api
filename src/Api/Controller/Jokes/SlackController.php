@@ -199,6 +199,60 @@ class SlackController
         $input = \Chuck\App\Api\Model\SlackInput::fromString($request->get('text'));
         $this->setLogger($app['monolog']);
 
+        if ($input->isHelpMode()) {
+
+            $attachments[] = [
+                'title'     => 'Random joke',
+                'text'      => 'Type `/chuck` to get a random joke.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
+                'title'     => 'Free text search',
+                'text'      => 'Type `/chuck ? {search_term}` to search within tens of thousands Chuck Norris jokes.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
+                'title'     => 'Random joke from category',
+                'text'      => 'Type `/chuck {category_name}` to get a random joke from within a given category.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
+                'title'     => 'Categories',
+                'text'      => 'Type `/chuck -cat` to retrieve a list of all categories.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
+                'title'     => 'Help',
+                'text'      => 'Type `/chuck help` to display a list of available commands.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $this->doLogging(
+                $text = '*Available commands:*',
+                $request
+            );
+
+            return new \Symfony\Component\HttpFoundation\JsonResponse(
+                [
+                    'icon_url'      => self::$iconUrl,
+                    'attachments'   => $attachments,
+                    'text'          => $text,
+                    'mrkdwn'        => true
+                ],
+                200,
+                [
+                    'Access-Control-Allow-Origin'      => '*',
+                    'Access-Control-Allow-Credentials' => 'true',
+                    'Access-Control-Allow-Methods'     => 'GET, HEAD',
+                    'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
+                ]
+            );
+        }
+
         if ($input->isEditMode()) {
             $category = $input->getArgCategory();
             $joke     = $input->getArgJoke();
@@ -258,7 +312,7 @@ class SlackController
 
         if ($category && ! $joke->getValue()) {
             $text = sprintf(
-                'Sorry dude, we\'ve found no jokes for the given category ("%s"). Type `/chuck -cat` to see available categories or search by query `/chuck ? {search_term}`.',
+                'Sorry dude ¯\_(ツ)_/¯ , we\'ve found no jokes for the given category ("%s"). Type `/chuck -cat` to see available categories or search by query `/chuck ? {search_term}`.',
                 $category
             );
         } else {

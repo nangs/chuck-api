@@ -33,6 +33,7 @@ class SlackInput
 
     // Mode constants
     const MODE_EDIT     = 'edit';
+    const MODE_HELP     = 'help';
     const MODE_SEARCH   = '?';
     const MODE_SHOW_CAT = 'cat';
 
@@ -166,6 +167,19 @@ class SlackInput
     public function isEditMode()
     {
         $pattern = sprintf('~\s-%s~', self::MODE_EDIT);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isHelpMode()
+    {
+        $pattern = sprintf('~\s*%s~', self::MODE_HELP);
 
         return preg_match($pattern, $this->input, $match)
             ? true
