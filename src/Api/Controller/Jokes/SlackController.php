@@ -26,6 +26,13 @@ class SlackController
     protected static $iconUrl = 'https://assets.chucknorris.host/img/avatar/chuck-norris.png';
 
     /**
+     * The holy shrug
+     *
+     * @var string
+     */
+    protected static $shrug = '¯\_(ツ)_/¯';
+
+    /**
      *
      * @param  string $text
      * @param  \Symfony\Component\HttpFoundation\Request $request
@@ -161,8 +168,9 @@ class SlackController
 
         } else {
             $text = sprintf(
-                'Your search for *"%s"* did not match any joke. Make sure that all words are spelled correctly. Try different keywords. Try more general keywords.',
-                $query
+                'Your search for *"%s"* did not match any joke %s. Make sure that all words are spelled correctly. Try different keywords. Try more general keywords.',
+                $query,
+                self::$shrug
             );
         }
 
@@ -259,7 +267,7 @@ class SlackController
             $id       = $input->getArgId();
 
             $this->doLogging(
-                $text = 'This lazy programmer still hasn\'t implemented this feature ...',
+                $text = sprintf('This lazy programmer still hasn\'t implemented this feature %s ...', self::$shrug),
                 $request
             );
 
@@ -312,7 +320,8 @@ class SlackController
 
         if ($category && ! $joke->getValue()) {
             $text = sprintf(
-                'Sorry dude ¯\_(ツ)_/¯ , we\'ve found no jokes for the given category ("%s"). Type `/chuck -cat` to see available categories or search by query `/chuck ? {search_term}`.',
+                'Sorry dude %s , we\'ve found no jokes for the given category ("%s"). Type `/chuck -cat` to see available categories or search by query `/chuck ? {search_term}`.',
+                self::$shrug,
                 $category
             );
         } else {
