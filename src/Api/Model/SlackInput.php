@@ -166,7 +166,7 @@ class SlackInput
      */
     public function isEditMode()
     {
-        $pattern = sprintf('~\s-%s~', self::MODE_EDIT);
+        $pattern = sprintf('~\s*-%s~', self::MODE_EDIT);
 
         return preg_match($pattern, $this->input, $match)
             ? true
@@ -192,7 +192,7 @@ class SlackInput
      */
     public function isSearchMode()
     {
-        $pattern = sprintf('~\s-%s~', self::MODE_SEARCH);
+        $pattern = sprintf('~\s*\%s~', self::MODE_SEARCH);
 
         return preg_match($pattern, $this->input, $match)
             ? true
@@ -205,7 +205,7 @@ class SlackInput
      */
     public function isShowCategories()
     {
-        $pattern = sprintf('~\s-%s~', self::MODE_SHOW_CAT);
+        $pattern = sprintf('~\s*-%s~', self::MODE_SHOW_CAT);
 
         return preg_match($pattern, $this->input, $match)
             ? true
