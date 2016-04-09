@@ -165,7 +165,11 @@ class SlackInput
      */
     public function isEditMode()
     {
-        return strpos($this->input, '-' . self::MODE_EDIT) !== false;
+        $pattern = sprintf('~\s-%s~', self::MODE_EDIT);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
     }
 
     /**
@@ -174,7 +178,11 @@ class SlackInput
      */
     public function isSearchMode()
     {
-        return strpos($this->input, self::MODE_SEARCH) !== false;
+        $pattern = sprintf('~\s-%s~', self::MODE_SEARCH);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
     }
 
     /**
@@ -183,7 +191,11 @@ class SlackInput
      */
     public function isShowCategories()
     {
-        return strpos($this->input, '-' . self::MODE_SHOW_CAT) !== false;
+        $pattern = sprintf('~\s-%s~', self::MODE_SHOW_CAT);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
     }
 
     /**
