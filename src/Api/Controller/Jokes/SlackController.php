@@ -115,25 +115,28 @@ class SlackController
 
             foreach ($response['result'] as $index => $joke) {
                 $attachment = [
-                    'title' => null,
-                    'text'  => $joke->getValue() . "\n"
+                    'title'     => sprintf('(%d)', $offset + $index + 1),
+                    'text'      => $joke->getValue() . "\n",
+                    'mrkdwn_in' => [
+                        'text', 'pretext', 'fields'
+                    ]
                 ];
+
+                if ($showJokeId) {
+                    $attachment['fields'][] = [
+                        'title' => 'Id',
+                        'value' => $joke->getId(),
+                        'short' => true
+                    ];
+                }
 
                 if ($showJokeCat) {
                     $attachment['fields'][] = [
                         'title' => 'Category',
                         'value' => $joke->hasCategory()
                             ? implode(',', $joke->getCategories())
-                            : '`false`',
-                        'short' => false
-                    ];
-                }
-
-                if ($showJokeId) {
-                    $attachment['fields'][] = [
-                        'title' => 'Id',
-                        'value' => $joke->getId(),
-                        'short' => false
+                            : '`none`',
+                        'short' => true
                     ];
                 }
 
@@ -142,7 +145,7 @@ class SlackController
 
             $text = sprintf(
                 '*Search results: %s - %s of %s*.',
-                0 === $offset ? 1 : $offset,
+                0 === $offset ? 1 : $offset + 1,
                 $shown = $offset + $index + 1,
                 number_format($response['total'], 0, '.', ','),
                 $query
@@ -171,10 +174,7 @@ class SlackController
                 'response_type' => 'in_channel',
                 'attachments'   => $attachments ? $attachments: null,
                 'text'          => $text,
-                'mrkdwn'        => true,
-                'mrkdwn_in'     => [
-                    'text', 'pretext'
-                ]
+                'mrkdwn'        => true
             ],
             200,
             [
