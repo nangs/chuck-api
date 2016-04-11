@@ -32,10 +32,11 @@ class SlackInput
     const ARG_START = 'start';
 
     // Mode constants
-    const MODE_EDIT     = 'edit';
-    const MODE_HELP     = 'help';
-    const MODE_SEARCH   = '?';
-    const MODE_SHOW_CAT = 'cat';
+    const MODE_EDIT      = 'edit';
+    const MODE_GET_BY_ID = ':';
+    const MODE_HELP      = 'help';
+    const MODE_SEARCH    = '?';
+    const MODE_SHOW_CAT  = 'cat';
 
     /**
      *
@@ -62,13 +63,13 @@ class SlackInput
     /**
      *
      * @param  string $argument
-     * @return string
+     * @return null|string
      */
     protected function getArg($argument)
     {
         preg_match("#--$argument\s+\K\w+#", $this->input, $match);
 
-        return $match[0];
+        return isset($match[0]) ? $match[0] : null;
     }
 
     /**
@@ -105,6 +106,19 @@ class SlackInput
     public function getArgStart()
     {
         return $this->getArg(self::ARG_START);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        $pattern = sprintf('~\:\s*\K[a-zA-Z0-9_-]{22}~', self::MODE_GET_BY_ID);
+
+        preg_match($pattern, $this->input, $match);
+
+        return isset($match[0]) ? $match[0] : null;
     }
 
     /**
@@ -167,6 +181,19 @@ class SlackInput
     public function isEditMode()
     {
         $pattern = sprintf('~\s*-%s~', self::MODE_EDIT);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isGetByIdMode()
+    {
+        $pattern = sprintf('~\s*\%s~', self::MODE_GET_BY_ID);
 
         return preg_match($pattern, $this->input, $match)
             ? true

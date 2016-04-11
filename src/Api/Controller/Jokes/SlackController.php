@@ -234,6 +234,12 @@ class SlackController
             ];
 
             $attachments[] = [
+                'title'     => 'Get by id',
+                'text'      => 'Type `/chuck : {joke_id}` to retrieve get a joke by a given `id`.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
                 'title'     => 'Help',
                 'text'      => 'Type `/chuck help` to display a list of available commands.',
                 'mrkdwn_in' => [ 'text' ]
@@ -286,6 +292,10 @@ class SlackController
             );
         }
 
+        if ($input->isSearchMode()) {
+            return $this->doSearchCommand($input, $app['chuck.joke'], $request);
+        }
+
         if ($input->isShowCategories()) {
 
             $text = $input->hasCountArg()
@@ -310,8 +320,38 @@ class SlackController
             );
         }
 
-        if ($input->isSearchMode()) {
-            return $this->doSearchCommand($input, $app['chuck.joke'], $request);
+        if ($input->isGetByIdMode()) {
+            if ($id = $input->getId()) {
+                $joke = $app['chuck.joke']->get($id);
+            }
+
+            if (! $joke instanceof \Chuck\Entity\Joke) {
+                $text = sprintf(
+                    'Sorry dude %s , we\'ve found no jokes for the given id ("%s").',
+                    self::$shrug,
+                    $id
+                );
+            } else {
+                $text = $input->hasIdArg()
+                    ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
+                    : $joke->getValue();
+            }
+
+            return new \Symfony\Component\HttpFoundation\JsonResponse(
+                [
+                    'icon_url'      => self::$iconUrl,
+                    'response_type' => 'in_channel',
+                    'text'          => $text,
+                    'mrkdwn'        => true
+                ],
+                200,
+                [
+                    'Access-Control-Allow-Origin'      => '*',
+                    'Access-Control-Allow-Credentials' => 'true',
+                    'Access-Control-Allow-Methods'     => 'GET, HEAD',
+                    'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
+                ]
+            );
         }
 
         $joke = $app['chuck.joke']->random(
