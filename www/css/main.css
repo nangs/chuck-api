@@ -27,11 +27,7 @@ header a {
 }
 
 header h1 {
-	text-transform: uppercase;
-	font-weight: 600;
-	font-family: 'Teko', sans-serif;
-	font-size: 70px;
-	display: inline;
+	
 }
 
 header h2 {
@@ -44,9 +40,7 @@ header h2 {
 }
 
 header img {
-	height: 150px;
-	width: 150px;
-	margin: 0 7.781px -45px 7.7810px;
+	width: 100%;
 }
 
 p {
@@ -60,7 +54,7 @@ h3, p {
 
 h3 {
 	font-size: 28px;
-	font-weight: 400;
+	font-weight: 300;
 	font-family: 'Teko', sans-serif;
 	margin: 0 0 10px 0;
 	padding: 0;
@@ -76,11 +70,11 @@ code.red {
 }
 
 code.quoted:before {
-    content: '`';
+	content: '`';
 }
 
 code.quoted:after {
-    content: '`';
+	content: '`';
 }
 
 pre {
@@ -135,7 +129,8 @@ blockquote p {
 footer:before {
 	content: "fs";
 	display: inline-block;
-	background-image: url("https://assets.chucknorris.host/img/chuck-norris-dancing.gif");
+	background-image:
+		url("https://assets.chucknorris.host/img/chuck-norris-dancing.gif");
 	height: 50px;
 	width: 50px;
 }

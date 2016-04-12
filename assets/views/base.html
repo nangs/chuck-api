@@ -5,7 +5,7 @@
         <meta name="google-site-verification" content="KSDmg43NwzWZj2DP9-cuzKEONcIZqW_cV_331SMUFYw" />
         <link type="text/css" rel="stylesheet" media="all" href="{{ asset('/css/main.css') }}" />
         <link rel="icon" href="{{ asset('/img/favicon.ico') }}" type="image/x-icon" />
-        <link href="https://fonts.googleapis.com/css?family=Teko:300,600" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Teko:300" rel="stylesheet" type="text/css">
         {% block head %}
             <title>Chuck Norris Jokes Api</title>
         {% endblock %}
@@ -13,10 +13,11 @@
     <body>
         <div class="wrapper">
             <header>
-                <a href="/">
-                    <h1>chuck <img alt="Chuck Norris Jokes Api" src="{{ asset('/img/chuck-norris-logo.jpg') }}"> norris.io</h1>
-                    <h2>JSON API for random Chuck Norris jokes</h2>
-                </a>
+                <h1>
+                    <a href="/" title="Chuck Norris Jokes Api - JSON API for random Chuck Norris jokes">
+                        <img alt="Chuck Norris Jokes Api - JSON API for random Chuck Norris jokes" src="{{ asset('/img/chuck-norris-logo.png') }}">
+                    </a>
+                </h1>
             </header>
             <div id="content">{% block content %}{% endblock %}</div>
             <footer>
