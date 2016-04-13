@@ -43,8 +43,13 @@ $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path'    => __DIR__ . '/../assets/views/'
 ]);
 $app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
-    $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) {
-        return sprintf('https://assets.chucknorris.host/%s', ltrim($asset, '/'));
+    $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
+        if ($app['debug']) {
+            return sprintf('/%s', ltrim($asset, '/'));
+        } else {
+            return sprintf('https://assets.chucknorris.host/%s', ltrim($asset, '/'));
+        }
+
     }));
     return $twig;
 }));
