@@ -143,6 +143,7 @@ class SlackInput
         }
 
         $response = preg_replace('~\\?~', '', $response, $limit = 1);
+        $response = preg_replace('~\\:~', '', $response, $limit = 1);
 
         return trim($response);
     }

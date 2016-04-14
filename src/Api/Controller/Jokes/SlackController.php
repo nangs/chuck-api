@@ -321,20 +321,29 @@ class SlackController
         }
 
         if ($input->isGetByIdMode()) {
-            if ($id = $input->getId()) {
-                $joke = $app['chuck.joke']->get($id);
+
+            if (null === $id = $input->getId()) {
+                $text = sprintf(
+                    'Sorry dude %s , the id ("%s") you\'ve entered is not valid.',
+                    self::$shrug,
+                    $input->getInputWithoutArgs()
+                );
             }
 
-            if (! $joke instanceof \Chuck\Entity\Joke) {
-                $text = sprintf(
-                    'Sorry dude %s , we\'ve found no jokes for the given id ("%s").',
-                    self::$shrug,
-                    $id
-                );
-            } else {
-                $text = $input->hasIdArg()
-                    ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
-                    : $joke->getValue();
+            if ($input->getId()) {
+                $joke = $app['chuck.joke']->get($id);
+
+                if ($joke instanceof \Chuck\Entity\Joke) {
+                    $text = $input->hasIdArg()
+                        ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
+                        : $joke->getValue();
+                } else {
+                    $text = sprintf(
+                        'Sorry dude %s , we\'ve found no jokes for the given id ("%s").',
+                        self::$shrug,
+                        $id
+                    );
+                }
             }
 
             return new \Symfony\Component\HttpFoundation\JsonResponse(
