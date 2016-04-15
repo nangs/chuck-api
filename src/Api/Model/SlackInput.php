@@ -32,6 +32,7 @@ class SlackInput
     const ARG_START = 'start';
 
     // Mode constants
+    const MODE_ADD       = '+';
     const MODE_EDIT      = 'edit';
     const MODE_GET_BY_ID = ':';
     const MODE_HELP      = 'help';
@@ -144,6 +145,7 @@ class SlackInput
 
         $response = preg_replace('~\\?~', '', $response, $limit = 1);
         $response = preg_replace('~\\:~', '', $response, $limit = 1);
+        $response = preg_replace('~\\+~', '', $response, $limit = 1);
 
         return trim($response);
     }
@@ -173,6 +175,19 @@ class SlackInput
     public function hasIdArg()
     {
         return strpos($this->input, '--' . self::ARG_ID) !== false;
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isAddMode()
+    {
+        $pattern = sprintf('~s*\%s~', self::MODE_ADD);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
     }
 
     /**
