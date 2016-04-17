@@ -76,8 +76,11 @@ class SlackController
                     'page_title' => 'The app was successfully installed for your Slack team.',
                     'message'    => [
                         'type'  => 'success',
-                        'value' => 'Congrats! The app was successfully installed for your Slack team and you\'re ready'
-                        . ' to laugh. Start by typing \'\chuck\' into your Slack console.' ]
+                        'value' => sprintf(
+                            '<b>Congrats!</b> The app was successfully installed for your Slack team ("%s").<br><br>Start retrieving random Chuck Norris facts by just typing <code>/chuck</code> into your slack console.<br><br>Additionally you can type <code>/chuck {category_name}</code> to get a random joke from a given category. Type <code>/chuck -cat</code> to show a list of all available categories.<br><br>You can also try the free text search by sending <code>/chuck ? {search_term}</code>.',
+                            $resourceOwner['team']
+                        )
+                    ]
                 ]
             );
         }

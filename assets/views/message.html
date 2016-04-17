@@ -8,7 +8,7 @@
 {% block content %}
     <section>
         <div class="alert alert-{{ message.type | default('success') }}" role="alert">
-            <p>{{ message.value | default('This is a default message body.') }}</p>
+            <p>{{ message.value | default('This is a default message body.') | raw }}</p>
         </div>
     </section>
 {% endblock %}
