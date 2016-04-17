@@ -2,8 +2,14 @@ api :
     path     : /
     methods  : GET
     defaults :
-        _controller: \Chuck\App\Api\Controller\IndexController::indexAction
+        _controller : \Chuck\App\Api\Controller\IndexController::indexAction
 
+api.categories :
+    path     : /categories
+    methods  : GET
+    defaults :
+        _controller : \Chuck\App\Api\Controller\CategoriesController::indexAction
+        
 connect:
     prefix   : /connect/
     resource : routes/connect.yml
