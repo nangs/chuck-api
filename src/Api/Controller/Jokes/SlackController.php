@@ -303,6 +303,12 @@ class SlackController
             ];
 
             $attachments[] = [
+                'title'     => 'Random personalized joke',
+                'text'      => 'Type `/chuck @{user_name}` to get a random personalized joke.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
                 'title'     => 'Categories',
                 'text'      => 'Type `/chuck -cat` to retrieve a list of all categories.',
                 'mrkdwn_in' => [ 'text' ]
@@ -442,6 +448,48 @@ class SlackController
             );
         }
 
+        if ($input->isPersonalizeMode()) {
+            if (null === $replaceTerm = $input->getArgPersonal()) {
+                $text = sprintf(
+                    'Sorry dude %s , no valid personalization token given "%s". Type `/chuck @{user_name}` to get a random personalized joke.',
+                    self::$shrug,
+                    $input->getInputWithoutArgs()
+                );
+            }
+
+            if ($replaceTerm) {
+                $joke = $app['chuck.joke']->personalizeRandom($replaceTerm);
+
+                if ($joke instanceof \Chuck\Entity\Joke) {
+                    $text = $input->hasIdArg()
+                    ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
+                    : $joke->getValue();
+                }
+            }
+
+            $this->doLogging($text, $request);
+
+            return new \Symfony\Component\HttpFoundation\JsonResponse(
+                [
+                'icon_url'      => self::$iconUrl,
+                'response_type' => 'in_channel',
+                'attachments'   => [
+                    [
+                        'fallback'   => $text,
+                        'title'      => '[permalink]',
+                        'title_link' => sprintf(
+                            'https://api.chucknorris.io/jokes/%s?utm_source=slack&utm_medium=api&utm_term=%s&utm_campaign=personalized+random+joke',
+                            $joke->getId(),
+                            $joke->getId()
+                            ),
+                        'text'       => $text
+                    ]
+                ],
+                'mrkdwn'        => true
+                ]
+            );
+        }
+
         $joke = $app['chuck.joke']->random(
             $category = $input->getInputWithoutArgs()
         );
@@ -460,7 +508,6 @@ class SlackController
 
         $this->doLogging($text, $request);
 
-
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
                 'icon_url'      => self::$iconUrl,
@@ -478,13 +525,6 @@ class SlackController
                     ]
                 ],
                 'mrkdwn'        => true
-            ],
-            200,
-            [
-                'Access-Control-Allow-Origin'      => '*',
-                'Access-Control-Allow-Credentials' => 'true',
-                'Access-Control-Allow-Methods'     => 'GET, HEAD',
-                'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
             ]
         );
     }

@@ -32,12 +32,13 @@ class SlackInput
     const ARG_START = 'start';
 
     // Mode constants
-    const MODE_ADD       = '+';
-    const MODE_EDIT      = 'edit';
-    const MODE_GET_BY_ID = ':';
-    const MODE_HELP      = 'help';
-    const MODE_SEARCH    = '?';
-    const MODE_SHOW_CAT  = 'cat';
+    const MODE_ADD         = '+';
+    const MODE_EDIT        = 'edit';
+    const MODE_GET_BY_ID   = ':';
+    const MODE_HELP        = 'help';
+    const MODE_PERSONALIZE = '@';
+    const MODE_SEARCH      = '?';
+    const MODE_SHOW_CAT    = 'cat';
 
     /**
      *
@@ -104,6 +105,17 @@ class SlackInput
      *
      * @return string
      */
+    public function getArgPersonal()
+    {
+        preg_match('~@\s*\K\w+~', $this->input, $match);
+
+        return isset($match[0]) ? $match[0] : null;
+    }
+
+    /**
+     *
+     * @return string
+     */
     public function getArgStart()
     {
         return $this->getArg(self::ARG_START);
@@ -143,6 +155,7 @@ class SlackInput
             $response = str_replace($match, '', $response);
         }
 
+        $response = preg_replace('~\\@~', '', $response, $limit = 1);
         $response = preg_replace('~\\?~', '', $response, $limit = 1);
         $response = preg_replace('~\\:~', '', $response, $limit = 1);
         $response = preg_replace('~\\+~', '', $response, $limit = 1);
@@ -223,6 +236,19 @@ class SlackInput
     public function isHelpMode()
     {
         $pattern = sprintf('~\s*%s~', self::MODE_HELP);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isPersonalizeMode()
+    {
+        $pattern = sprintf('~s*%s~', self::MODE_PERSONALIZE);
 
         return preg_match($pattern, $this->input, $match)
             ? true
