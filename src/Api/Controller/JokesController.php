@@ -72,6 +72,14 @@ class JokesController
     ) {
         $joke = $app['chuck.joke']->random();
 
+        if ('text/plain' === $request->headers->get('accept')) {
+            return new \Symfony\Component\HttpFoundation\Response(
+                $joke->getValue(),
+                \Symfony\Component\HttpFoundation\Response::HTTP_OK,
+                [ 'content-type' => 'text/plain' ]
+            );
+        }
+
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
                 'icon_url' => 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
