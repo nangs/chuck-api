@@ -23,8 +23,9 @@ GET https://api.chucknorris.io/jokes/random
 Example response:
 ```json
 {
-    "icon_url" : "https://api.chucknorris.io/img/avatar/chuck-norris.png",
+    "icon_url" : "https://api.chucknorris.host/img/avatar/chuck-norris.png",
     "id"       : "hd0l0jcrtwyjcjgmr7timw",
+    "url"      : "https://api.chucknorris.io/jokes/hd0l0jcrtwyjcjgmr7timw"
     "value"    : "Chuck Norris can touch MC Hammer."
 }
 ```

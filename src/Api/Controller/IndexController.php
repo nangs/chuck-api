@@ -37,9 +37,8 @@ class IndexController
                 'example_response_text'     => strval($joke->getValue()),
                 'example_response_url'      => $app['url_generator']->generate(
                     'api.get_joke',
-                    [
-                        'id' => $joke->getId()
-                    ]
+                    [ 'id' => $joke->getId() ],
+                    \Symfony\Component\Routing\Generator\UrlGenerator::ABSOLUTE_URL
                 ),
                 'slack_url'                 => \Chuck\App\Api\Controller\Connect\SlackController::getAuthUrl(
                     $app['url_generator']

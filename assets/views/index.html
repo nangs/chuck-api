@@ -25,7 +25,8 @@
             {<br>
                 "icon_url" : "<span id="response_icon_url">{{ example_response_icon_url }}</span>",<br>
                 "id" : "<span id="response_id">{{ example_response_id }}</span>",<br>
-                "value" : "<a href="{{ example_response_url }}" id="response_text">{{ example_response_text }}</a>"<br>
+                "url" : "<a href="{{ example_response_url }}" id="response_url">{{ example_response_url }}</a>"<br>
+                "value" : "<span id="response_text">{{ example_response_text }}</span>"<br>
             }
         </code>
         </pre>
@@ -79,11 +80,13 @@
         req.onreadystatechange = function() {
             if (4 == req.readyState && 200 == req.status) {
                 var reponse = JSON.parse(req.responseText);
-                
+                console.log(reponse.value)
                 document.getElementById('response_icon_url').innerHTML = reponse.icon_url;
-                document.getElementById('response_text').innerHTML     = reponse.value;
-                document.getElementById('response_text').href          = '/jokes/' + reponse.id;
                 document.getElementById('response_id').innerHTML       = reponse.id;
+                document.getElementById('response_url').innerHTML      = reponse.url;
+                document.getElementById('response_url').href           = reponse.url;
+                document.getElementById('response_text').innerHTML     = reponse.value;
+                
              }
         }
         

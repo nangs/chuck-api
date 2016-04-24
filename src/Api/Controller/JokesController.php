@@ -84,6 +84,11 @@ class JokesController
             [
                 'icon_url' => 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
                 'id'       => $joke->getId(),
+                'url'      => $app['url_generator']->generate(
+                    'api.get_joke',
+                    [ 'id' => $joke->getId() ],
+                    \Symfony\Component\Routing\Generator\UrlGenerator::ABSOLUTE_URL
+                ),
                 'value'    => $joke->getValue()
             ],
             200,

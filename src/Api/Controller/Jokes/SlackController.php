@@ -481,7 +481,7 @@ class SlackController
                             'https://api.chucknorris.io/jokes/%s?utm_source=slack&utm_medium=api&utm_term=%s&utm_campaign=personalized+random+joke',
                             $joke->getId(),
                             $joke->getId()
-                            ),
+                        ),
                         'text'       => $text
                     ]
                 ],
