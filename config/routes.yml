@@ -17,3 +17,15 @@ connect:
 jokes:
     prefix   : /jokes/
     resource : routes/jokes.yml
+
+sitemap.index :
+    path      : /sitemaps/index.xml
+    methods   : GET
+    defaults  :
+        _controller : \Chuck\App\Api\Controller\SitemapController::indexAction
+
+sitemap.jokes :
+    path      : /sitemaps/jokes-{page}.xml
+    methods   : GET
+    defaults  :
+        _controller : \Chuck\App\Api\Controller\SitemapController::jokesAction
