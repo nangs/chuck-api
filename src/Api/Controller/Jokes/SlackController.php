@@ -458,7 +458,9 @@ class SlackController
             }
 
             if ($replaceTerm) {
-                $joke = $app['chuck.joke']->personalizeRandom($replaceTerm);
+                $joke = $app['chuck.joke']->personalizeRandom(
+                    ucfirst($replaceTerm)
+                );
 
                 if ($joke instanceof \Chuck\Entity\Joke) {
                     $text = $input->hasIdArg()
