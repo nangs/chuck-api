@@ -473,21 +473,21 @@ class SlackController
 
             return new \Symfony\Component\HttpFoundation\JsonResponse(
                 [
-                'icon_url'      => self::$iconUrl,
-                'response_type' => 'in_channel',
-                'attachments'   => [
-                    [
-                        'fallback'   => $text,
-                        'title'      => '[permalink]',
-                        'title_link' => sprintf(
-                            'https://api.chucknorris.io/jokes/%s?utm_source=slack&utm_medium=api&utm_term=%s&utm_campaign=personalized+random+joke',
-                            $joke->getId(),
-                            $joke->getId()
-                        ),
-                        'text'       => $text
+                    'icon_url'      => self::$iconUrl,
+                    'response_type' => 'in_channel',
+                    'attachments'   => [
+                        [
+                            'fallback'   => $text,
+                            'title'      => '[permalink]',
+                            'title_link' => sprintf(
+                                'https://api.chucknorris.io/jokes/%s?utm_source=slack&utm_medium=api&utm_term=%s&utm_campaign=personalized+random+joke',
+                                $joke->getId(),
+                                $joke->getId()
+                            ),
+                            'text'       => $text,
+                            'mrkdwn_in'  => [ 'text' ]
+                        ]
                     ]
-                ],
-                'mrkdwn'        => true
                 ]
             );
         }
@@ -523,10 +523,10 @@ class SlackController
                             $joke->getId(),
                             $joke->getId()
                         ),
-                        'text'       => $text
+                        'text'       => $text,
+                        'mrkdwn_in'  => [ 'text' ]
                     ]
-                ],
-                'mrkdwn'        => true
+                ]
             ]
         );
     }

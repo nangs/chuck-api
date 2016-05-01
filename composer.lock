@@ -63,12 +63,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chucknorris-io/chuck-lib.git",
-                "reference": "7d8a5e8b8901ecbf73b0163d7511f5b2fb9a48e5"
+                "reference": "68d9f5aa3a3125d38569196b80d4d1c4be5bc8a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/7d8a5e8b8901ecbf73b0163d7511f5b2fb9a48e5",
-                "reference": "7d8a5e8b8901ecbf73b0163d7511f5b2fb9a48e5",
+                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/68d9f5aa3a3125d38569196b80d4d1c4be5bc8a6",
+                "reference": "68d9f5aa3a3125d38569196b80d4d1c4be5bc8a6",
                 "shasum": ""
             },
             "require": {
@@ -106,7 +106,7 @@
                 "issues": "https://github.com/chucknorris-io/chuck-lib/issues",
                 "source": "https://github.com/chucknorris-io/chuck-lib/tree/master"
             },
-            "time": "2016-04-25 23:00:42"
+            "time": "2016-05-01 10:14:06"
         },
         {
             "name": "doctrine/annotations",
@@ -911,16 +911,16 @@
         },
         {
             "name": "league/oauth2-client",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-client.git",
-                "reference": "317812ac843d59e60b8934537693064dbc9786d0"
+                "reference": "f145fded7d61a5388e76ed720c5dce185c1d36fe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/317812ac843d59e60b8934537693064dbc9786d0",
-                "reference": "317812ac843d59e60b8934537693064dbc9786d0",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/f145fded7d61a5388e76ed720c5dce185c1d36fe",
+                "reference": "f145fded7d61a5388e76ed720c5dce185c1d36fe",
                 "shasum": ""
             },
             "require": {
@@ -970,7 +970,7 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2016-04-19 12:48:05"
+            "time": "2016-04-29 15:11:06"
         },
         {
             "name": "monolog/monolog",
