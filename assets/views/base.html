@@ -3,10 +3,10 @@
     <head>
         <meta charset="utf-8" />
         <meta name="google-site-verification" content="KSDmg43NwzWZj2DP9-cuzKEONcIZqW_cV_331SMUFYw" />
-        
+
         <link rel="icon" href="{{ asset('/img/favicon.ico') }}" type="image/x-icon" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+
         {% block head %}
             <title>Chuck Norris Jokes Api</title>
         {% endblock %}
@@ -19,14 +19,14 @@
             header { text-align: center; }
             header a { text-decoration: none !important; }
         </style>
-        
+
     </head>
     <body>
         <div class="wrapper">
             <header>
                 <h1>
                     <a href="/" title="Chuck Norris Jokes Api - JSON API for random Chuck Norris jokes">
-                        <img alt="Chuck Norris Jokes Api - JSON API for random Chuck Norris jokes" src="{{ asset('/img/chuck-norris-logo.png') }}">
+                        <img alt="Chuck Norris Jokes Api - JSON API for random Chuck Norris jokes" src="{{ asset('/img/chucknorris_logo_coloured_small.png') }}">
                     </a>
                 </h1>
             </header>
@@ -46,23 +46,23 @@
                </small>
            </footer>
         </div>
-        
+
         <script>
         var cb = function() {
         	var l = document.createElement('link'); l.rel = 'stylesheet';
             l.href = '{{ asset('/css/main.css') }}';
             var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
          };
-         
+
          var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
          if (raf) raf(cb);
          else window.addEventListener('load', cb);
-        
+
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
             m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-        
+
            ga('create', 'UA-75350742-1', 'auto');
            ga('send', 'pageview');
         </script>

@@ -5,7 +5,7 @@
    "keywords"         : [ "Chuck", "Norris", "Chuck Norris", "Chuck Norris Jokes" ],
    "license"          : "GPL-3.0+",
    "require"          : {
-      "php"                      : "~5.5",
+      "php"                      : "~5.6",
       "bramdevries/oauth2-slack" : "~0.1",
       "chucknorris/lib"          : "dev-master",
       "monolog/monolog"          : "~1",

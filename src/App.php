@@ -12,6 +12,7 @@ $app = new \Silex\Application();
 
 $app['application_env'] = \Chuck\Util::getEnvOrDefault('APPLICATION_ENV', 'production');
 $app['debug']           = 'production' === $app['application_env'] ? false : true;
+$app['debug'] = true;
 
 $app->extend('routes', function (
     \Symfony\Component\Routing\RouteCollection $routes,
