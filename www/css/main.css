@@ -38,7 +38,19 @@ header h2 {
 }
 
 header img {
-	width: 360px;
+    padding: 2%;
+	width: 96%;
+}
+
+@media only screen and (min-width : 360px) {
+    header img {
+        padding: 0;
+    	width: 360px;
+    }
+}
+
+div#content {
+    margin: 5px;
 }
 
 p {
@@ -59,12 +71,14 @@ h3 {
 }
 
 code {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 	white-space: normal;
 	padding: 0;
 }
 
 code.red {
-	color: #a71d5d;
+	color: #f15a24;
 }
 
 code.quoted:before {
@@ -98,7 +112,7 @@ code.request a:hover {
 }
 
 code.request.get:before {
-	color: #a71d5d;
+	color: #f15a24;
 	content: 'GET ';
 }
 
