@@ -3,7 +3,9 @@
 {% block head %}
     <title>{{ page_title }} - Chuck Norris Jokes Api</title>
     <meta content="{{ current_joke.value }}" name="description" />
+    <link rel="prev prerender" href="{{ next_joke.url }}" />
     <link rel="canonical" href="{{ current_joke.url }}" />
+    <link rel="next prerender" href="{{ next_joke.url }}" />
     <meta name="robots" content="index, follow" />
 {% endblock %}
 
