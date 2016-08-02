@@ -36,7 +36,7 @@ This distribution is covered by the **GNU GENERAL PUBLIC LICENSE**, Version 3, 2
 
 ## Support & Contact
 
-Having trouble with this repository? Check out the documentation at the repository's site or contact admin@chucknorris.io and we’ll help you sort it out.
+Having trouble with this repository? Check out the documentation at the repository's site or contact m@matchilling.com and we’ll help you sort it out.
 
 Happy Coding
 
