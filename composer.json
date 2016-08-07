@@ -1,10 +1,10 @@
 {
-   "name"             : "chucknorris/api",
-   "description"      : "chucknorris.io is a free JSON API for hand curated Chuck Norris facts.",
-   "homepage"         : "https://api.chucknorris.io",
-   "keywords"         : [ "Chuck", "Norris", "Chuck Norris", "Chuck Norris Jokes" ],
-   "license"          : "GPL-3.0+",
-   "require"          : {
+   "name"              : "chucknorris/api",
+   "description"       : "chucknorris.io is a free JSON API for hand curated Chuck Norris facts.",
+   "homepage"          : "https://api.chucknorris.io",
+   "keywords"          : [ "Chuck", "Norris", "Chuck Norris", "Chuck Norris Jokes" ],
+   "license"           : "GPL-3.0+",
+   "require"           : {
       "php"                       : "~5.6",
       "bramdevries/oauth2-slack"  : "~0.1",
       "chucknorris/lib"           : "dev-master",
@@ -16,10 +16,13 @@
       "twig/twig"                 : "~1.2",
       "vlucas/phpdotenv"          : "^2.3"
    },
-   "repositories"     : [
+   "repositories"      : [
         { "type": "vcs", "url": "git@github.com:chucknorris-io/chuck-lib.git" }
     ],
-   "autoload"         : { "psr-4":{ "Chuck\\App\\":"src" } },
-   "prefer-stable"    : true,
-   "minimum-stability": "dev"
+   "autoload"          : { "psr-4":{ "Chuck\\App\\":"src" } },
+   "prefer-stable"     : true,
+   "minimum-stability" : "dev",
+   "scripts"           : {
+        "serve": "php -S 127.0.0.1:8080 -t www/ www/index.php"
+    }
 }
