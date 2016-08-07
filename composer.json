@@ -13,7 +13,8 @@
       "silex/silex"               : "~1.1",
       "symfony/config"            : "~3.0",
       "symfony/yaml"              : "~3.0",
-      "twig/twig"                 : "~1.2"
+      "twig/twig"                 : "~1.2",
+      "vlucas/phpdotenv"          : "^2.3"
    },
    "repositories"     : [
         { "type": "vcs", "url": "git@github.com:chucknorris-io/chuck-lib.git" }

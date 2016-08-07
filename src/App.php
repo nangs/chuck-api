@@ -3,10 +3,18 @@
 /**
  * App.php - created Mar 6, 2016 3:03:18 PM
  *
- * @copyright Copyright (c) pinkbigmacmedia
+ * @copyright Copyright (c) Mathias Schilling <m@matchilling>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
  */
-require_once sprintf('%s/vendor/autoload.php', dirname(__DIR__));
+require_once sprintf('%s/vendor/autoload.php', $appDirectory = dirname(__DIR__));
+
+if (file_exists(sprintf('%s/.env', $appDirectory))) {
+    $dotenv = new \Dotenv\Dotenv($appDirectory);
+    $dotenv->load();
+}
 
 $app = new \Silex\Application();
 
