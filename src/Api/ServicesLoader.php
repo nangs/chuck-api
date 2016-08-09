@@ -53,7 +53,10 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
         $this->app['chuck.joke'] = $this->app->share(
             function () {
                 return new \Chuck\JokeFacade(
-                    new \Chuck\Broker\Joke(new \Chuck\Database('fromEnv'), new \Webmozart\Json\JsonDecoder())
+                    new \Chuck\Broker\Joke(
+                        new \Chuck\Database('fromEnv'),
+                        new \Chuck\Entity\Factory()
+                    )
                 );
             }
         );
