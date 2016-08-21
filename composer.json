@@ -28,6 +28,6 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "scripts": {
-        "serve": "php -S 127.0.0.1:8080 -t www/ www/index.php"
+        "serve": "php -d max_execution_time=0 -S 127.0.0.1:8080 -t www/ www/index.php"
     }
 }
