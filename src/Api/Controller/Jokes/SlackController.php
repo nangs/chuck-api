@@ -152,6 +152,11 @@ class SlackController
     {
         $response = null;
         foreach ($categories = $jokeFacade->getCategories() as $category) {
+            // Remove 'explicit' category
+            if ('explicit' === $category['name']) {
+                continue;
+            }
+
             $response[] = $showCount
                 ? sprintf('%s (%d)', $category['name'], $category['count'])
                 : $category['name'];
@@ -459,13 +464,14 @@ class SlackController
 
             if ($replaceTerm) {
                 $joke = $app['chuck.joke']->personalizeRandom(
-                    ucfirst($replaceTerm)
+                    ucfirst($replaceTerm),
+                    $parentalControl = true
                 );
 
                 if ($joke instanceof \Chuck\Entity\Joke) {
                     $text = $input->hasIdArg()
-                    ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
-                    : $joke->getValue();
+                        ? sprintf('%s `[ joke_id: %s ]`', $joke->getValue(), $joke->getId())
+                        : $joke->getValue();
                 }
             }
 
