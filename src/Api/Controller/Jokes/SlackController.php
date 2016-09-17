@@ -46,82 +46,6 @@ class SlackController
 
     /**
      *
-     * @param  \Chuck\App\Api\Model\SlackInput           $input
-     * @param  \Chuck\JokeFacade                         $jokeFacade
-     * @param  \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    protected function doAddCommand(
-        \Chuck\App\Api\Model\SlackInput           $input,
-        \Chuck\JokeFacade                         $jokeFacade,
-        \Symfony\Component\HttpFoundation\Request $request
-    ) {
-
-        if (! $value = $input->getInputWithoutArgs()) {
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
-                [
-                    'icon_url'      => self::$iconUrl,
-                    'text'          => sprintf('Invalid input given ("%s").', $input->getInputWithoutArgs()),
-                    'mrkdwn'        => true
-                ]
-            );
-        }
-
-        $joke = new \Chuck\Entity\Joke([
-            'id'         => \Chuck\Util::createSlugUuid(),
-            'value'      => $value,
-            'categories' => ! empty($input->getArgCategory())
-                ? $input->getArgCategory()
-                : null
-        ]);
-
-        try {
-            $joke = $jokeFacade->insert($joke);
-        } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $exception) {
-            $this->doLogging($exception->getMessage(), $request);
-
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
-                [
-                    'icon_url'      => self::$iconUrl,
-                    'text'          => sprintf('Sorry dude %s , this joke already exists.', self::$shrug)
-                ]
-            );
-
-        } catch (\Exception $exception) {
-            $this->doLogging($exception->getMessage(), $request);
-
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
-                [
-                    'icon_url'      => self::$iconUrl,
-                    'text'          => sprintf('Sorry dude %s , something went wrong here. Please check the syntax and try again.', self::$shrug)
-                ]
-            );
-        }
-
-        $this->doLogging(
-            sprintf('Added new joke ("joke_id: %s").', $joke->getId()),
-            $request
-        );
-
-        $attachments[] = [
-            'title'     => sprintf('Id: %s', $joke->getId()),
-            'text'      => $joke->getValue(),
-            'mrkdwn_in' => [ 'text' ]
-        ];
-
-        return new \Symfony\Component\HttpFoundation\JsonResponse(
-            [
-                'icon_url'      => self::$iconUrl,
-                'attachments'   => $attachments,
-                'response_type' => self::RESPONSE_TYPE_EPHEMERAL,
-                'text'          => '*Joke was successfully saved!*',
-                'mrkdwn'        => true
-            ]
-        );
-    }
-
-    /**
-     *
      * @param  string $text
      * @param  \Symfony\Component\HttpFoundation\Request $request
      * @return void
@@ -373,10 +297,6 @@ class SlackController
                     'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
                 ]
             );
-        }
-
-        if ($input->isAddMode()) {
-            return $this->doAddCommand($input, $app['chuck.joke'], $request);
         }
 
         if ($input->isEditMode()) {
