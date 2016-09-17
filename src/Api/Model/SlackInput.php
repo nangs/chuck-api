@@ -39,6 +39,7 @@ class SlackInput
     const MODE_PERSONALIZE = '@';
     const MODE_SEARCH      = '?';
     const MODE_SHOW_CAT    = 'cat';
+    const MODE_QUITE       = 'q';
 
     /**
      *
@@ -159,6 +160,7 @@ class SlackInput
         $response = preg_replace('~\\?~', '', $response, $limit = 1);
         $response = preg_replace('~\\:~', '', $response, $limit = 1);
         $response = preg_replace('~\\+~', '', $response, $limit = 1);
+        $response = preg_replace('/-.*$/', '', $response);
 
         return trim($response);
     }
@@ -262,6 +264,19 @@ class SlackInput
     public function isSearchMode()
     {
         $pattern = sprintf('~\s*\%s~', self::MODE_SEARCH);
+
+        return preg_match($pattern, $this->input, $match)
+            ? true
+            : false;
+    }
+
+    /**
+     *
+     * @return boolean
+     */
+    public function isQuietMode()
+    {
+        $pattern = sprintf('~\s*-%s~', self::MODE_QUITE);
 
         return preg_match($pattern, $this->input, $match)
             ? true

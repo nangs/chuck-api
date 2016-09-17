@@ -34,6 +34,18 @@ class SlackController
 
     /**
      *
+     * @var string
+     */
+    const RESPONSE_TYPE_EPHEMERAL = 'ephemeral';
+
+    /**
+     *
+     * @var string
+     */
+    const RESPONSE_TYPE_IN_CHANNEL = 'in_channel';
+
+    /**
+     *
      * @param  \Chuck\App\Api\Model\SlackInput           $input
      * @param  \Chuck\JokeFacade                         $jokeFacade
      * @param  \Symfony\Component\HttpFoundation\Request $request
@@ -60,7 +72,7 @@ class SlackController
             'value'      => $value,
             'categories' => ! empty($input->getArgCategory())
                 ? $input->getArgCategory()
-                : nulll
+                : null
         ]);
 
         try {
@@ -101,6 +113,7 @@ class SlackController
             [
                 'icon_url'      => self::$iconUrl,
                 'attachments'   => $attachments,
+                'response_type' => self::RESPONSE_TYPE_EPHEMERAL,
                 'text'          => '*Joke was successfully saved!*',
                 'mrkdwn'        => true
             ]
@@ -259,7 +272,9 @@ class SlackController
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
                 'icon_url'      => self::$iconUrl,
-                'response_type' => 'in_channel',
+                'response_type' => $input->isQuietMode()
+                    ? self::RESPONSE_TYPE_EPHEMERAL
+                    : self::RESPONSE_TYPE_IN_CHANNEL,
                 'attachments'   => $attachments ? $attachments: null,
                 'text'          => $text,
                 'mrkdwn'        => true
@@ -326,6 +341,12 @@ class SlackController
             ];
 
             $attachments[] = [
+                'title'     => 'Quite mode',
+                'text'      => 'Add the `-q` flag to your command to set the response type to `ephemeral`.',
+                'mrkdwn_in' => [ 'text' ]
+            ];
+
+            $attachments[] = [
                 'title'     => 'Help',
                 'text'      => 'Type `/chuck help` to display a list of available commands.',
                 'mrkdwn_in' => [ 'text' ]
@@ -341,7 +362,8 @@ class SlackController
                     'icon_url'      => self::$iconUrl,
                     'attachments'   => $attachments,
                     'text'          => $text,
-                    'mrkdwn'        => true
+                    'mrkdwn'        => true,
+                    'response_type' => self::RESPONSE_TYPE_EPHEMERAL
                 ],
                 200,
                 [
@@ -369,8 +391,9 @@ class SlackController
 
             return new \Symfony\Component\HttpFoundation\JsonResponse(
                 [
-                    'icon_url' => self::$iconUrl,
-                    'text'     => $text
+                    'icon_url'      => self::$iconUrl,
+                    'text'          => $text,
+                    'response_type' => self::RESPONSE_TYPE_EPHEMERAL
                 ],
                 200,
                 [
@@ -398,7 +421,8 @@ class SlackController
                 [
                     'icon_url'      => self::$iconUrl,
                     'text'          => $text,
-                    'mrkdwn'        => true
+                    'mrkdwn'        => true,
+                    'response_type' => self::RESPONSE_TYPE_EPHEMERAL
                 ],
                 200,
                 [
@@ -439,7 +463,9 @@ class SlackController
             return new \Symfony\Component\HttpFoundation\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
-                    'response_type' => 'in_channel',
+                    'response_type' => $input->isQuietMode()
+                        ? self::RESPONSE_TYPE_EPHEMERAL
+                        : self::RESPONSE_TYPE_IN_CHANNEL,
                     'text'          => $text,
                     'mrkdwn'        => true
                 ],
@@ -480,7 +506,9 @@ class SlackController
             return new \Symfony\Component\HttpFoundation\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
-                    'response_type' => 'in_channel',
+                    'response_type' => $input->isQuietMode()
+                        ? self::RESPONSE_TYPE_EPHEMERAL
+                        : self::RESPONSE_TYPE_IN_CHANNEL,
                     'attachments'   => [
                         [
                             'fallback'   => $text,
@@ -499,10 +527,10 @@ class SlackController
         }
 
         $joke = $app['chuck.joke']->random(
-            $category = $input->getInputWithoutArgs()
+            $category = $input->getInputWithoutArgs() ? : null
         );
 
-        if ($category && ! $joke->getValue()) {
+        if ($category && ! $joke instanceof \Chuck\Entity\Joke) {
             $text = sprintf(
                 'Sorry dude %s , we\'ve found no jokes for the given category ("%s"). Type `/chuck -cat` to see available categories or search by query `/chuck ? {search_term}`.',
                 self::$shrug,
@@ -514,19 +542,23 @@ class SlackController
             return new \Symfony\Component\HttpFoundation\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
-                    'response_type' => 'in_channel',
+                    'response_type' => $input->isQuietMode()
+                        ? self::RESPONSE_TYPE_EPHEMERAL
+                        : self::RESPONSE_TYPE_IN_CHANNEL,
                     'text'          => $text,
                     'mrkdwn'        => true
                 ]
             );
         }
 
-        $this->doLogging($text, $request);
+        $this->doLogging($joke->getValue(), $request);
 
         return new \Symfony\Component\HttpFoundation\JsonResponse(
             [
                 'icon_url'      => self::$iconUrl,
-                'response_type' => 'in_channel',
+                'response_type' => $input->isQuietMode()
+                    ? self::RESPONSE_TYPE_EPHEMERAL
+                    : self::RESPONSE_TYPE_IN_CHANNEL,
                 'attachments'   => [
                     [
                         'fallback'   => $text = $input->hasIdArg()
