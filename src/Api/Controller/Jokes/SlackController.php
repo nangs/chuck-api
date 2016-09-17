@@ -299,32 +299,6 @@ class SlackController
             );
         }
 
-        if ($input->isEditMode()) {
-            $category = $input->getArgCategory();
-            $joke     = $input->getArgJoke();
-            $id       = $input->getArgId();
-
-            $this->doLogging(
-                $text = sprintf('This lazy programmer still hasn\'t implemented this feature %s ...', self::$shrug),
-                $request
-            );
-
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
-                [
-                    'icon_url'      => self::$iconUrl,
-                    'text'          => $text,
-                    'response_type' => self::RESPONSE_TYPE_EPHEMERAL
-                ],
-                200,
-                [
-                    'Access-Control-Allow-Origin'      => '*',
-                    'Access-Control-Allow-Credentials' => 'true',
-                    'Access-Control-Allow-Methods'     => 'GET, HEAD',
-                    'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
-                ]
-            );
-        }
-
         if ($input->isSearchMode()) {
             return $this->doSearchCommand($input, $app['chuck.joke'], $request);
         }
