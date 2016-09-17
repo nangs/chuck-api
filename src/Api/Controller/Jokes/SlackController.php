@@ -1,12 +1,17 @@
 <?php
-
 /**
  * SlackController.php - created Mar 6, 2016 3:03:18 PM
  *
- * @copyright Copyright (c) pinkbigmacmedia
+ * @copyright Copyright (c) Mathias Schilling <m@matchilling>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
  */
 namespace Chuck\App\Api\Controller\Jokes;
+
+use \Chuck\App\Api\Model as Model;
+use \Symfony\Component\HttpFoundation as HttpFoundation;
 
 /**
  *
@@ -47,13 +52,11 @@ class SlackController
     /**
      *
      * @param  string $text
-     * @param  \Symfony\Component\HttpFoundation\Request $request
+     * @param  HttpFoundation\Request $request
      * @return void
      */
-    protected function doLogging(
-        $text,
-        \Symfony\Component\HttpFoundation\Request $request
-    ) {
+    protected function doLogging($text, HttpFoundation\Request $request)
+    {
         $this->logInfo(
             json_encode([
                 'type'      => 'slack_command',
@@ -111,15 +114,15 @@ class SlackController
 
     /**
      *
-     * @param \Chuck\App\Api\Model\SlackInput           $input
-     * @param \Chuck\JokeFacade                         $jokeFacade
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @param  Model\SlackInput       $input
+     * @param  \Chuck\JokeFacade      $jokeFacade
+     * @param  HttpFoundation\Request $request
+     * @return Model\JsonResponse
      */
     protected function doSearchCommand(
-        \Chuck\App\Api\Model\SlackInput           $input,
-        \Chuck\JokeFacade                         $jokeFacade,
-        \Symfony\Component\HttpFoundation\Request $request
+        Model\SlackInput       $input,
+        \Chuck\JokeFacade      $jokeFacade,
+        HttpFoundation\Request $request
     ) {
 
         $offset = (int) ! empty($input->getArgStart())
@@ -193,7 +196,7 @@ class SlackController
 
         $this->doLogging($text, $request);
 
-        return new \Symfony\Component\HttpFoundation\JsonResponse(
+        return new Model\JsonResponse(
             [
                 'icon_url'      => self::$iconUrl,
                 'response_type' => $input->isQuietMode()
@@ -215,15 +218,15 @@ class SlackController
 
     /**
      *
-     * @param  \Silex\Application                        $app
-     * @param  \Symfony\Component\HttpFoundation\Request $request
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     * @param  \Silex\Application     $app
+     * @param  HttpFoundation\Request $request
+     * @return Model\JsonResponse
      */
     public function indexAction(
-        \Silex\Application $app,
-        \Symfony\Component\HttpFoundation\Request $request
+        \Silex\Application     $app,
+        HttpFoundation\Request $request
     ) {
-        $input = \Chuck\App\Api\Model\SlackInput::fromString($request->get('text'));
+        $input = Model\SlackInput::fromString($request->get('text'));
         $this->setLogger($app['monolog']);
 
         if ($input->isHelpMode()) {
@@ -281,20 +284,13 @@ class SlackController
                 $request
             );
 
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
+            return new Model\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
                     'attachments'   => $attachments,
                     'text'          => $text,
                     'mrkdwn'        => true,
                     'response_type' => self::RESPONSE_TYPE_EPHEMERAL
-                ],
-                200,
-                [
-                    'Access-Control-Allow-Origin'      => '*',
-                    'Access-Control-Allow-Credentials' => 'true',
-                    'Access-Control-Allow-Methods'     => 'GET, HEAD',
-                    'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
                 ]
             );
         }
@@ -311,19 +307,12 @@ class SlackController
 
             $this->doLogging($text, $request);
 
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
+            return new Model\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
                     'text'          => $text,
                     'mrkdwn'        => true,
                     'response_type' => self::RESPONSE_TYPE_EPHEMERAL
-                ],
-                200,
-                [
-                    'Access-Control-Allow-Origin'      => '*',
-                    'Access-Control-Allow-Credentials' => 'true',
-                    'Access-Control-Allow-Methods'     => 'GET, HEAD',
-                    'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
                 ]
             );
         }
@@ -354,7 +343,7 @@ class SlackController
                 }
             }
 
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
+            return new Model\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
                     'response_type' => $input->isQuietMode()
@@ -362,13 +351,6 @@ class SlackController
                         : self::RESPONSE_TYPE_IN_CHANNEL,
                     'text'          => $text,
                     'mrkdwn'        => true
-                ],
-                200,
-                [
-                    'Access-Control-Allow-Origin'      => '*',
-                    'Access-Control-Allow-Credentials' => 'true',
-                    'Access-Control-Allow-Methods'     => 'GET, HEAD',
-                    'Access-Control-Allow-Headers'     => 'Content-Type, Accept, X-Requested-With'
                 ]
             );
         }
@@ -397,7 +379,7 @@ class SlackController
 
             $this->doLogging($text, $request);
 
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
+            return new Model\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
                     'response_type' => $input->isQuietMode()
@@ -433,7 +415,7 @@ class SlackController
 
             $this->doLogging($text, $request);
 
-            return new \Symfony\Component\HttpFoundation\JsonResponse(
+            return new Model\JsonResponse(
                 [
                     'icon_url'      => self::$iconUrl,
                     'response_type' => $input->isQuietMode()
@@ -447,7 +429,7 @@ class SlackController
 
         $this->doLogging($joke->getValue(), $request);
 
-        return new \Symfony\Component\HttpFoundation\JsonResponse(
+        return new Model\JsonResponse(
             [
                 'icon_url'      => self::$iconUrl,
                 'response_type' => $input->isQuietMode()
