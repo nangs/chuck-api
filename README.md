@@ -15,29 +15,45 @@ beard, and his role in the action television series Walker, Texas Ranger.
 
 ## Usage
 
-Retrieve a random chuck joke in JSON format:
+
 ```
+// Retrieve a random chuck joke in JSON format
+$ curl --request GET \
+       --url 'https://api.chucknorris.io/jokes/random' \
+       --header 'content-type: application/json'
+
+// Retrieve a random chuck joke in plain text
+$ curl --request GET \
+       --url 'https://api.chucknorris.io/jokes/random' \
+       --header 'accept: text/plain'
+
+// Add an optional `category` parameter to get a random joke from the given category
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/random?category=dev' \
+       --header 'content-type: application/json'
+
+// Retrieve a list of availbale categories
+$ curl --request GET \
+       --url 'https://api.chucknorris.io/jokes/categories' \
        --header 'content-type: application/json'
 ```
 
 Example response:
 ```json
 {
-    category : [
+    "category" : [
         "dev"
     ],
-    icon_url : "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
-    id       : "ye0_hnd3rgq68e_pfvsqqg",
-    url      : "https://127.0.0.1:8080/jokes/ye0_hnd3rgq68e_pfvsqqg",
-    value    : "Chuck Norris can instantiate an abstract class."
+    "icon_url" : "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    "id"       : "ye0_hnd3rgq68e_pfvsqqg",
+    "url"      : "https://api.chucknorris.io/jokes/ye0_hnd3rgq68e_pfvsqqg",
+    "value"    : "Chuck Norris can instantiate an abstract class."
 }
 ```
 
 ## License
 
-This distribution is covered by the **GNU GENERAL PUBLIC LICENSE**, Version 3, 29 June 2007. 
+This distribution is covered by the **GNU GENERAL PUBLIC LICENSE**, Version 3, 29 June 2007.
 
 ## Support & Contact
 

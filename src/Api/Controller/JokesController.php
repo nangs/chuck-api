@@ -29,9 +29,31 @@ class JokesController
 
     /**
      *
-     * @var \Chuck\JokeFacade
+     * @param  \Silex\Application $app
+     * @param  HttpFoundation\Request $request
+     * @throws Exception\NotFoundHttpException
+     * @return HttpFoundation\Response|Model\JsonResponse
      */
-    protected $jokeFacade;
+    public function categoryAction(\Silex\Application $app, HttpFoundation\Request $request)
+    {
+        /* @var \Chuck\JokeFacade $jokeFacade */
+        $jokeFacade =  $app['chuck.joke'];
+
+        /* @var array $categories */
+        $categories = array_map(function($category) {
+            return $category['name'];
+        }, $jokeFacade->getCategories());
+
+        if ('text/plain' === $request->headers->get('accept')) {
+            return new HttpFoundation\Response(
+                implode("\n", $categories),
+                HttpFoundation\Response::HTTP_OK,
+                [ 'content-type' => 'text/plain' ]
+            );
+        }
+
+        return new Model\JsonResponse($categories);
+    }
 
     /**
      *

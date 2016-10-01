@@ -1,3 +1,9 @@
+api.joke_categories :
+    path     : /categories
+    methods  : GET
+    defaults :
+        _controller : \Chuck\App\Api\Controller\JokesController::categoryAction
+
 api.joke_random :
     path     : /random
     methods  : GET
@@ -9,9 +15,10 @@ api.joke_slack :
     methods  : [ GET, POST ]
     defaults :
         _controller: \Chuck\App\Api\Controller\Jokes\SlackController::indexAction
-        
+
 api.get_joke :
     path     : /{id}
     methods  : GET
     defaults :
         _controller : \Chuck\App\Api\Controller\JokesController::getAction
+
