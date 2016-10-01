@@ -36,16 +36,22 @@ $app->extend('routes', function (
 });
 
 $app->register(new \Chuck\App\Api\ServicesLoader());
+
+$streamHandler = new \Monolog\Handler\StreamHandler(
+    'php://stdout',
+    \Monolog\Logger::INFO
+);
+$streamHandler->setFormatter(new \Bramus\Monolog\Formatter\ColoredLineFormatter(
+    new \Bramus\Monolog\Formatter\ColorSchemes\TrafficLight)
+);
 $app->register(
     new \Silex\Provider\MonologServiceProvider(),
     [
         'monolog.name'    => 'chuck_norris',
-        'monolog.handler' => $streamHandler = new \Monolog\Handler\StreamHandler(
-            'php://stdout',
-            \Monolog\Logger::INFO
-        )
+        'monolog.handler' => $streamHandler
     ]
 );
+
 $app->register(new \Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new \Silex\Provider\TwigServiceProvider(), [
     'twig.path'    => __DIR__ . '/../assets/views/'
