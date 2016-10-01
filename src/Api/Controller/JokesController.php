@@ -11,7 +11,9 @@
 namespace Chuck\App\Api\Controller;
 
 use \Chuck\App\Api\Model as Model;
+use \Chuck\Entity as Entity;
 use \Symfony\Component\HttpFoundation as HttpFoundation;
+use \Symfony\Component\HttpKernel\Exception as Exception;
 use \Symfony\Component\Routing\Generator as Generator;
 
 /**
@@ -36,12 +38,16 @@ class JokesController
      * @param  \Silex\Application     $app
      * @param  HttpFoundation\Request $request
      * @param  string                 $id
+     * @throws Exception\NotFoundHttpException
      * @return string
      */
     public function getAction(\Silex\Application $app, HttpFoundation\Request $request, $id)
     {
-        /* @var \Chuck\Entity\JokeWindow $jokeWindow */
         $jokeWindow = $app['chuck.joke']->window($id);
+
+        if (! $jokeWindow instanceof Entity\JokeWindow) {
+            throw new Exception\NotFoundHttpException();
+        }
 
         /* @var Generator\UrlGenerator $urlGenerator */
         $urlGenerator = $app['url_generator'];
@@ -72,12 +78,19 @@ class JokesController
     /**
      *
      * @param  \Silex\Application $app
+     * @param  HttpFoundation\Request $request
+     * @throws Exception\NotFoundHttpException
      * @return HttpFoundation\Response|Model\JsonResponse
      */
     public function randomAction(\Silex\Application $app, HttpFoundation\Request $request)
     {
-        /* @var \Chuck\Entity\Joke $joke */
-        $joke = $app['chuck.joke']->random();
+        $joke = $app['chuck.joke']->random(
+            $category = $request->query->get('category', null)
+        );
+
+        if (! $joke instanceof Entity\Joke) {
+            throw new Exception\NotFoundHttpException();
+        }
 
         /* @var Generator\UrlGenerator $urlGenerator */
         $urlGenerator = $app['url_generator'];
@@ -92,6 +105,7 @@ class JokesController
 
         return new Model\JsonResponse(
             [
+                'category' => $joke->getCategories(),
                 'icon_url' => 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
                 'id'       => $joke->getId(),
                 'url'      => $urlGenerator->generate(

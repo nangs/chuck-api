@@ -17,16 +17,21 @@ beard, and his role in the action television series Walker, Texas Ranger.
 
 Retrieve a random chuck joke in JSON format:
 ```
-GET https://api.chucknorris.io/jokes/random
+$ curl --request GET \
+       --url 'https://api.chucknorris.io/jokes/random?category=dev' \
+       --header 'content-type: application/json'
 ```
 
 Example response:
 ```json
 {
-    "icon_url" : "https://api.chucknorris.host/img/avatar/chuck-norris.png",
-    "id"       : "hd0l0jcrtwyjcjgmr7timw",
-    "url"      : "https://api.chucknorris.io/jokes/hd0l0jcrtwyjcjgmr7timw",
-    "value"    : "Chuck Norris can touch MC Hammer."
+    category : [
+        "dev"
+    ],
+    icon_url : "https://assets.chucknorris.host/img/avatar/chuck-norris.png",
+    id       : "ye0_hnd3rgq68e_pfvsqqg",
+    url      : "https://127.0.0.1:8080/jokes/ye0_hnd3rgq68e_pfvsqqg",
+    value    : "Chuck Norris can instantiate an abstract class."
 }
 ```
 
