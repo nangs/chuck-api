@@ -10,6 +10,12 @@ api.joke_random :
     defaults :
         _controller: \Chuck\App\Api\Controller\JokesController::randomAction
 
+api.joke_search :
+    path     : /search
+    methods  : [ GET ]
+    defaults :
+        _controller: \Chuck\App\Api\Controller\JokesController::searchAction
+
 api.joke_slack :
     path     : /slack
     methods  : [ GET, POST ]

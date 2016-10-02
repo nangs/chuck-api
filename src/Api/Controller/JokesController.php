@@ -10,6 +10,7 @@
  */
 namespace Chuck\App\Api\Controller;
 
+use \Chuck\App\Api\Formatter as Formatter;
 use \Chuck\App\Api\Model as Model;
 use \Chuck\Entity as Entity;
 use \Symfony\Component\HttpFoundation as HttpFoundation;
@@ -65,7 +66,9 @@ class JokesController
      */
     public function getAction(\Silex\Application $app, HttpFoundation\Request $request, $id)
     {
-        $jokeWindow = $app['chuck.joke']->window($id);
+        /* @var \Chuck\JokeFacade $jokeFacade */
+        $jokeFacade =  $app['chuck.joke'];
+        $jokeWindow = $jokeFacade->window($id);
 
         if (! $jokeWindow instanceof Entity\JokeWindow) {
             throw new Exception\NotFoundHttpException();
@@ -114,9 +117,6 @@ class JokesController
             throw new Exception\NotFoundHttpException();
         }
 
-        /* @var Generator\UrlGenerator $urlGenerator */
-        $urlGenerator = $app['url_generator'];
-
         if ('text/plain' === $request->headers->get('accept')) {
             return new HttpFoundation\Response(
                 $joke->getValue(),
@@ -125,18 +125,36 @@ class JokesController
             );
         }
 
+        /* @var Formatter\JokeFormatter $jokeFormatter */
+        $jokeFormatter = new Formatter\JokeFormatter($app['url_generator']);
+
         return new Model\JsonResponse(
-            [
-                'category' => $joke->getCategories(),
-                'icon_url' => 'https://assets.chucknorris.host/img/avatar/chuck-norris.png',
-                'id'       => $joke->getId(),
-                'url'      => $urlGenerator->generate(
-                    'api.get_joke',
-                    [ 'id' => $joke->getId() ],
-                    Generator\UrlGenerator::ABSOLUTE_URL
-                ),
-                'value'    => $joke->getValue()
-            ]
+            $jokeFormatter->format($joke)
         );
+    }
+
+    /**
+     *
+     * @param  \Silex\Application $app
+     * @param  HttpFoundation\Request $request
+     * @throws Exception\NotFoundHttpException
+     * @return \Chuck\App\Api\Model\JsonResponse
+     */
+    public function searchAction(\Silex\Application $app, HttpFoundation\Request $request)
+    {
+        if (! $query = $request->query->get('query', null)) {
+            throw new Exception\NotFoundHttpException();
+        }
+
+        $response = $app['chuck.joke']->searchByQuery($query);
+
+        /* @var Formatter\JokeFormatter $jokeFormatter */
+        $jokeFormatter = new Formatter\JokeFormatter($app['url_generator']);
+
+        foreach ($response['result'] as &$joke) {
+            $joke = $jokeFormatter->format($joke);
+        }
+
+        return new Model\JsonResponse($response);
     }
 }

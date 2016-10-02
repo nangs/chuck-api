@@ -36,6 +36,11 @@ $ curl --request GET \
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/categories' \
        --header 'content-type: application/json'
+       
+// Free text search
+$ curl --request GET \
+       --url 'https://api.chucknorris.io/jokes/search?query={query}' \
+       --header 'content-type: application/json'
 ```
 
 Example response:
