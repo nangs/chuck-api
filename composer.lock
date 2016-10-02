@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b06c517d6466becc46257fdbc8870e80",
-    "content-hash": "3db85fc81942267bf7f2d6d50e3205c3",
+    "hash": "5b1f9f6204793eb90ded6f49bfd67c4b",
+    "content-hash": "5e29a3ca646e048cfc572fb7a12e231d",
     "packages": [
         {
             "name": "bramdevries/oauth2-slack",
@@ -141,16 +141,16 @@
         },
         {
             "name": "chucknorris/lib",
-            "version": "v0.2.3",
+            "version": "v0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chucknorris-io/chuck-lib.git",
-                "reference": "1bef72eac30e79c9ed25e5172247962201f3ea7f"
+                "reference": "5154b0b7de0f8dc332a75d721916b4a10157933b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/1bef72eac30e79c9ed25e5172247962201f3ea7f",
-                "reference": "1bef72eac30e79c9ed25e5172247962201f3ea7f",
+                "url": "https://api.github.com/repos/chucknorris-io/chuck-lib/zipball/5154b0b7de0f8dc332a75d721916b4a10157933b",
+                "reference": "5154b0b7de0f8dc332a75d721916b4a10157933b",
                 "shasum": ""
             },
             "require": {
@@ -178,9 +178,9 @@
             "support": {
                 "email": "m@matchilling.com",
                 "issues": "https://github.com/chucknorris-io/chuck-lib/issues",
-                "source": "https://github.com/chucknorris-io/chuck-lib/tree/v0.2.3"
+                "source": "https://github.com/chucknorris-io/chuck-lib/tree/v0.3.0"
             },
-            "time": "2016-09-17 20:36:53"
+            "time": "2016-10-02 14:32:46"
         },
         {
             "name": "doctrine/annotations",
