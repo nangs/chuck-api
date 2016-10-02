@@ -62,12 +62,25 @@ class JokesController
      * @param  HttpFoundation\Request $request
      * @param  string                 $id
      * @throws Exception\NotFoundHttpException
-     * @return string
+     * @return string|Model\JsonResponse
      */
     public function getAction(\Silex\Application $app, HttpFoundation\Request $request, $id)
     {
         /* @var \Chuck\JokeFacade $jokeFacade */
         $jokeFacade =  $app['chuck.joke'];
+
+        if ('application/json' === $request->headers->get('accept')) {
+            /* @var Entity\Joke $joke */
+            $joke = $jokeFacade->get($id);
+
+            /* @var Formatter\JokeFormatter $jokeFormatter */
+            $jokeFormatter = new Formatter\JokeFormatter($app['url_generator']);
+
+            return new Model\JsonResponse(
+                $jokeFormatter->format($jokeFacade->update($joke))
+            );
+        }
+
         $jokeWindow = $jokeFacade->window($id);
 
         if (! $jokeWindow instanceof Entity\JokeWindow) {
