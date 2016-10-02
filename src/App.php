@@ -73,6 +73,10 @@ $app->error(function (\Exception $exception, $httpStatusCode) use ($app) {
     if ($app['debug']) {
         return;
     }
+
+    return $app->json([
+        'message' => 'Whoops, looks like something went wrong.'
+    ]);
 });
 
 return $app;
