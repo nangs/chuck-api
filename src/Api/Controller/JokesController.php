@@ -138,7 +138,7 @@ class JokesController
      * @param  \Silex\Application $app
      * @param  HttpFoundation\Request $request
      * @throws Exception\NotFoundHttpException
-     * @return \Chuck\App\Api\Model\JsonResponse
+     * @return HttpFoundation\Response|Model\JsonResponse
      */
     public function searchAction(\Silex\Application $app, HttpFoundation\Request $request)
     {
@@ -148,6 +148,24 @@ class JokesController
 
         $response = $app['chuck.joke']->searchByQuery($query);
 
+        if ('text/plain' === $request->headers->get('accept')) {
+            $jokeList = array_map(
+                function (Entity\Joke $joke) {
+                    return $joke->getValue();
+                },
+                $response['result']
+            );
+
+            return new HttpFoundation\Response(
+                implode("\n", $jokeList),
+                HttpFoundation\Response::HTTP_OK,
+                [
+                    'content-type'   => 'text/plain',
+                    'x-result-count' => $response['total']
+                ]
+            );
+        }
+
         /* @var Formatter\JokeFormatter $jokeFormatter */
         $jokeFormatter = new Formatter\JokeFormatter($app['url_generator']);
 
@@ -155,6 +173,10 @@ class JokesController
             $joke = $jokeFormatter->format($joke);
         }
 
-        return new Model\JsonResponse($response);
+        return new Model\JsonResponse(
+            $response,
+            Model\JsonResponse::HTTP_OK,
+            [ 'x-result-count' => $response['total'] ]
+        );
     }
 }
