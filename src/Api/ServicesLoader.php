@@ -50,6 +50,24 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
     {
         $this->app = $app;
 
+        $this->app['config'] = $this->app->share(
+            function () {
+                return [
+                    'application_env'          => getenv('APPLICATION_ENV')          ? : null,
+                    'blackfire_server_id'      => getenv('BLACKFIRE_SERVER_ID')      ? : null,
+                    'blackfire_server_token'   => getenv('BLACKFIRE_SERVER_TOKEN')   ? : null,
+                    'database_url'             => getenv('DATABASE_URL')             ? : null,
+                    'logzio_api_key'           => getenv('LOGZIO_API_KEY')           ? : null,
+                    'mongodb_uri'              => getenv('MONGODB_URI')              ? : null,
+                    'papertrail_api_token'     => getenv('PAPERTRAIL_API_TOKEN')     ? : null,
+                    'slack_auth'               => getenv('SLACK_AUTH')
+                        ? json_decode(getenv('SLACK_AUTH'), true)
+                        : null,
+                    'slack_verification_token' => getenv('SLACK_VERIFICATION_TOKEN') ? : null
+                ];
+            }
+        );
+
         $this->app['chuck.joke'] = $this->app->share(
             function () {
                 return new \Chuck\JokeFacade(

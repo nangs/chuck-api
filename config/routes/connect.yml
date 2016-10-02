@@ -9,3 +9,4 @@ api.connect_slack :
     methods  : GET
     defaults :
         _controller: \Chuck\App\Api\Controller\Connect\SlackController::connectAction
+
