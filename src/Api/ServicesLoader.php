@@ -69,6 +69,7 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
                     'database_url'                => getenv('DATABASE_URL')                ? : null,
                     'facebook_app_id'             => getenv('FACEBOOK_APP_ID')             ? : null,
                     'facebook_app_secret'         => getenv('FACEBOOK_APP_SECRET')         ? : null,
+                    'facebook_page_access_token'  => getenv('FACEBOOK_PAGE_ACCESS_TOKEN') ? : null,
                     'facebook_verification_token' => getenv('FACEBOOK_VERIFICATION_TOKEN') ? : null,
                     'logzio_api_key'              => getenv('LOGZIO_API_KEY')              ? : null,
                     'mongodb_uri'                 => getenv('MONGODB_URI')                 ? : null,
@@ -95,6 +96,17 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
         $this->app['chuck.entity_factory'] = $this->app->share(
             function () {
                 return new \Chuck\Entity\Factory();
+            }
+        );
+
+        $this->app['facebook.graph-sdk'] = $this->app->share(
+            function () {
+                return new \Facebook\Facebook([
+                    'app_id'                => $this->app['config']['facebook_app_id'],
+                    'app_secret'            => $this->app['config']['facebook_app_secret'],
+                    'default_graph_version' => 'v2.7',
+                    'default_access_token'  => $this->app['config']['facebook_page_access_token']
+                ]);
             }
         );
     }

@@ -9,6 +9,7 @@
         "bramdevries/oauth2-slack": "~0.1",
         "bramus/monolog-colored-line-formatter": "^2.0",
         "chucknorris/lib": "~0.3",
+        "facebook/graph-sdk": "^5.3",
         "monolog/monolog": "~1",
         "nochso/html-compress-twig": "~1",
         "silex/silex": "~1.1",

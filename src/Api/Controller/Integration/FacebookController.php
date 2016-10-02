@@ -23,11 +23,11 @@ use \Symfony\Component\HttpFoundation as HttpFoundation;
  */
 class FacebookController
 {
-
     /**
      *
-     * @param  \Silex\Application      $app
-     * @param  HttpFoundation\Request  $request
+     * @param  \Silex\Application $app
+     * @param  HttpFoundation\Request $request
+     * @throws Exception\NotFoundHttpException
      * @return HttpFoundation\Response
      */
     public function indexAction(\Silex\Application $app, HttpFoundation\Request $request)
@@ -36,12 +36,49 @@ class FacebookController
         $logger = $app['monolog'];
 
         $logger->info(
-            $data = json_encode($request->request->all())
+            'Incoming request data',
+            $data = $request->request->all()
         );
 
+        if ('page' !== $data['object']) {
+            throw new Exception\NotFoundHttpException();
+        }
+
+        /* @var \Chuck\JokeFacade $jokeFacade */
+        $jokeFacade = $app['chuck.joke'];
+
+        /* @var \Chuck\JokeFacade $jokeFacade */
+        $joke = $jokeFacade->random();
+
+        $error = false;
+        foreach($data['entry'] as $entry) {
+            foreach($entry['messaging'] as $messaging) {
+                $params = [
+                    'recipient' => [
+                        'id'   => $messaging['sender']['id']
+                    ],
+                    'message'   => [
+                        'text' => $joke->getValue()
+                    ]
+                ];
+
+                try {
+                    /* @var \Facebook\FacebookResponse $facebook */
+                    $facebookResponse = $app['facebook.graph-sdk']->post('/me/messages', $params);
+                } catch (\Exception $exception) {
+                    $error = true;
+                    $logger->error($exception->getMessage(), [
+                        'exception' => $exception->__toString()
+                    ]);
+                }
+            }
+        }
+
         return new HttpFoundation\Response(
-            $data,
-            HttpFoundation\Response::HTTP_OK,
+            null,
+            false === $error
+                ? HttpFoundation\Response::HTTP_OK
+                : HttpFoundation\Response::HTTP_INTERNAL_SERVER_ERROR,
             [ 'content-type' => 'text/plain' ]
         );
     }
