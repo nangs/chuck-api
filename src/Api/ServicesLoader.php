@@ -50,6 +50,16 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
     {
         $this->app = $app;
 
+        $this->app['acl'] = $this->app->share(
+            function () {
+                return [
+                    'edit' => getenv('ACL_CAN_EDIT')
+                        ? json_decode(getenv('ACL_CAN_EDIT'), true)
+                        : []
+                ];
+            }
+        );
+
         $this->app['config'] = $this->app->share(
             function () {
                 return [
@@ -76,6 +86,12 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
                         new \Chuck\Entity\Factory()
                     )
                 );
+            }
+        );
+
+        $this->app['chuck.entity_factory'] = $this->app->share(
+            function () {
+                return new \Chuck\Entity\Factory();
             }
         );
     }

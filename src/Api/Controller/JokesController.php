@@ -179,4 +179,45 @@ class JokesController
             [ 'x-result-count' => $response['total'] ]
         );
     }
+
+    /**
+     *
+     * @param  \Silex\Application     $app
+     * @param  HttpFoundation\Request $request
+     * @param  string                 $id
+     * @throws Exception\UnprocessableEntityHttpException
+     * @return Model\JsonResponse
+     */
+    public function updateAction(\Silex\Application $app, HttpFoundation\Request $request, $id)
+    {
+        /* @var \Chuck\JokeFacade $jokeFacade */
+        $jokeFacade = $app['chuck.joke'];
+
+        /* @var Entity\Joke $joke */
+        $joke = $jokeFacade->get($id);
+
+        if (! $joke instanceof Entity\Joke) {
+            throw new Exception\UnprocessableEntityHttpException();
+        }
+
+        /* @var Entity\Factory $entityFactory */
+        $entityFactory = $app['chuck.entity_factory'];
+
+        /* @var Entity\Joke $joke */
+        $joke = $entityFactory->fromArray(
+            Entity\Joke::class,
+            [
+                'id'         => $joke->getId(),
+                'categories' => $request->request->get('categories', $joke->getCategories()),
+                'value'      => $request->request->get('value', $joke->getValue())
+            ]
+        );
+
+        /* @var Formatter\JokeFormatter $jokeFormatter */
+        $jokeFormatter = new Formatter\JokeFormatter($app['url_generator']);
+
+        return new Model\JsonResponse(
+            $jokeFormatter->format($jokeFacade->update($joke))
+        );
+    }
 }

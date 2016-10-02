@@ -12,13 +12,13 @@ api.joke_random :
 
 api.joke_search :
     path     : /search
-    methods  : [ GET ]
+    methods  : GET
     defaults :
         _controller : \Chuck\App\Api\Controller\JokesController::searchAction
 
 api.joke_slack :
     path     : /slack
-    methods  : [ GET, POST ]
+    methods  : POST
     defaults :
         _controller         : \Chuck\App\Api\Controller\Jokes\SlackController::indexAction
     options  :
@@ -30,3 +30,10 @@ api.get_joke :
     defaults :
         _controller : \Chuck\App\Api\Controller\JokesController::getAction
 
+api.update_joke :
+    path     : /{id}
+    methods  : PUT
+    defaults :
+        _controller : \Chuck\App\Api\Controller\JokesController::updateAction
+    options  :
+        _before_middlewares : [ \Chuck\App\Api\Middleware\Authorization::edit, \Chuck\App\Api\Middleware\RequestBodyParser::parse ]
