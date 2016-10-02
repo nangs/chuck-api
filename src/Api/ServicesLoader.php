@@ -63,17 +63,20 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
         $this->app['config'] = $this->app->share(
             function () {
                 return [
-                    'application_env'          => getenv('APPLICATION_ENV')          ? : null,
-                    'blackfire_server_id'      => getenv('BLACKFIRE_SERVER_ID')      ? : null,
-                    'blackfire_server_token'   => getenv('BLACKFIRE_SERVER_TOKEN')   ? : null,
-                    'database_url'             => getenv('DATABASE_URL')             ? : null,
-                    'logzio_api_key'           => getenv('LOGZIO_API_KEY')           ? : null,
-                    'mongodb_uri'              => getenv('MONGODB_URI')              ? : null,
-                    'papertrail_api_token'     => getenv('PAPERTRAIL_API_TOKEN')     ? : null,
-                    'slack_auth'               => getenv('SLACK_AUTH')
+                    'application_env'             => getenv('APPLICATION_ENV')             ? : null,
+                    'blackfire_server_id'         => getenv('BLACKFIRE_SERVER_ID')         ? : null,
+                    'blackfire_server_token'      => getenv('BLACKFIRE_SERVER_TOKEN')      ? : null,
+                    'database_url'                => getenv('DATABASE_URL')                ? : null,
+                    'facebook_app_id'             => getenv('FACEBOOK_APP_ID')             ? : null,
+                    'facebook_app_secret'         => getenv('FACEBOOK_APP_SECRET')         ? : null,
+                    'facebook_verification_token' => getenv('FACEBOOK_VERIFICATION_TOKEN') ? : null,
+                    'logzio_api_key'              => getenv('LOGZIO_API_KEY')              ? : null,
+                    'mongodb_uri'                 => getenv('MONGODB_URI')                 ? : null,
+                    'papertrail_api_token'        => getenv('PAPERTRAIL_API_TOKEN')        ? : null,
+                    'slack_auth'                  => getenv('SLACK_AUTH')
                         ? json_decode(getenv('SLACK_AUTH'), true)
                         : null,
-                    'slack_verification_token' => getenv('SLACK_VERIFICATION_TOKEN') ? : null
+                    'slack_verification_token'    => getenv('SLACK_VERIFICATION_TOKEN')    ? : null
                 ];
             }
         );

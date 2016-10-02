@@ -41,8 +41,8 @@ $streamHandler = new \Monolog\Handler\StreamHandler(
     'php://stdout',
     \Monolog\Logger::INFO
 );
-$streamHandler->setFormatter(new \Bramus\Monolog\Formatter\ColoredLineFormatter(
-    new \Bramus\Monolog\Formatter\ColorSchemes\TrafficLight)
+$streamHandler->setFormatter(
+    new \Bramus\Monolog\Formatter\ColoredLineFormatter(new \Bramus\Monolog\Formatter\ColorSchemes\TrafficLight)
 );
 $app->register(
     new \Silex\Provider\MonologServiceProvider(),

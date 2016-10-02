@@ -12,6 +12,20 @@ jokes:
     prefix   : /jokes/
     resource : routes/jokes.yml
 
+api.intg_facebook_verify :
+    path     : /integration/facebook
+    methods  : GET
+    defaults :
+        _controller : \Chuck\App\Api\Controller\Integration\FacebookController::subscribeAction
+
+api.intg_facebook :
+    path     : /integration/facebook
+    methods  : POST
+    defaults :
+        _controller : \Chuck\App\Api\Controller\Integration\FacebookController::indexAction
+    options  :
+        _before_middlewares : [ \Chuck\App\Api\Middleware\RequestBodyParser::parse ]
+
 sitemap.index :
     path      : /sitemaps/index.xml
     methods   : GET

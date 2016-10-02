@@ -41,7 +41,7 @@ class JokesController
         $jokeFacade =  $app['chuck.joke'];
 
         /* @var array $categories */
-        $categories = array_map(function($category) {
+        $categories = array_map(function ($category) {
             return $category['name'];
         }, $jokeFacade->getCategories());
 
