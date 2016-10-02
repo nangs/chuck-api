@@ -32,11 +32,11 @@ $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/random?category=dev' \
        --header 'content-type: application/json'
 
-// Retrieve a list of availbale categories
+// Retrieve a list of available categories
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/categories' \
        --header 'content-type: application/json'
-       
+
 // Free text search
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/search?query={query}' \
