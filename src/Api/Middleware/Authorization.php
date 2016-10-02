@@ -30,7 +30,7 @@ class Authorization
      * @param  \Silex\Application $app
      * @throws Exception\SlackVerificationTokenException
      */
-    public function edit(HttpFoundation\Request $request, \Silex\Application $app)
+    public static function edit(HttpFoundation\Request $request, \Silex\Application $app)
     {
         /* @var HttpFoundation\HeaderBag $headers */
         $headers = $request->headers;

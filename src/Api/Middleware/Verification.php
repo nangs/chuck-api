@@ -30,7 +30,7 @@ class Verification
      * @param  \Silex\Application $app
      * @throws Exception\SlackVerificationTokenException
      */
-    public function slackOrigin(HttpFoundation\Request $request, \Silex\Application $app)
+    public static function slackOrigin(HttpFoundation\Request $request, \Silex\Application $app)
     {
         $token = $request->request->get(
             'token',

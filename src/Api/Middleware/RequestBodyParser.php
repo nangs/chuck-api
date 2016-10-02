@@ -28,7 +28,7 @@ class RequestBodyParser
      * @param  HttpFoundation\Request $request
      * @param  \Silex\Application $app
      */
-    public function parse(HttpFoundation\Request $request, \Silex\Application $app)
+    public static function parse(HttpFoundation\Request $request, \Silex\Application $app)
     {
         if (0 === strpos($request->headers->get('content-type'), 'application/json')) {
             $data = json_decode(
