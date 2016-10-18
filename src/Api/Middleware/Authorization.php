@@ -24,13 +24,13 @@ use \Symfony\Component\HttpFoundation as HttpFoundation;
 class Authorization
 {
     /**
-     * Determine whether someone is allowed to make changes to the domain object
+     * Determine whether someone is allowed to write
      *
      * @param  HttpFoundation\Request $request
      * @param  \Silex\Application $app
      * @throws Exception\SlackVerificationTokenException
      */
-    public static function edit(HttpFoundation\Request $request, \Silex\Application $app)
+    public static function write(HttpFoundation\Request $request, \Silex\Application $app)
     {
         /* @var HttpFoundation\HeaderBag $headers */
         $headers = $request->headers;
@@ -40,7 +40,7 @@ class Authorization
             ? substr($headers->get('authorization'), 7)
             : null;
 
-        if (! in_array($apiKey, $app['acl']['edit'])) {
+        if (! in_array($apiKey, $app['acl']['write'])) {
             throw new Exception\UnauthorizedHttpException();
         }
     }

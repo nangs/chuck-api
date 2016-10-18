@@ -53,8 +53,8 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
         $this->app['acl'] = $this->app->share(
             function () {
                 return [
-                    'edit' => getenv('ACL_CAN_EDIT')
-                        ? json_decode(getenv('ACL_CAN_EDIT'), true)
+                    'write' => getenv('ACL_CAN_WRITE')
+                        ? json_decode(getenv('ACL_CAN_WRITE'), true)
                         : []
                 ];
             }

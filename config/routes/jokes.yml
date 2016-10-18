@@ -36,4 +36,4 @@ api.update_joke :
     defaults :
         _controller : \Chuck\App\Api\Controller\JokesController::updateAction
     options  :
-        _before_middlewares : [ \Chuck\App\Api\Middleware\Authorization::edit, \Chuck\App\Api\Middleware\RequestBodyParser::parse ]
+        _before_middlewares : [ \Chuck\App\Api\Middleware\Authorization::write, \Chuck\App\Api\Middleware\RequestBodyParser::parse ]
