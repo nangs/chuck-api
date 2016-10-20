@@ -60,6 +60,38 @@ class JokesController
      *
      * @param  \Silex\Application     $app
      * @param  HttpFoundation\Request $request
+     * @return Model\JsonResponse
+     */
+    public function createAction(\Silex\Application $app, HttpFoundation\Request $request)
+    {
+        /* @var \Chuck\JokeFacade $jokeFacade */
+        $jokeFacade = $app['chuck.joke'];
+
+        /* @var Entity\Factory $entityFactory */
+        $entityFactory = $app['chuck.entity_factory'];
+
+        /* @var Entity\Joke $joke */
+        $joke = $entityFactory->fromArray(
+            Entity\Joke::class,
+            [
+                'id'         => \Chuck\Util::createSlugUuid(),
+                'categories' => $request->request->get('categories', []),
+                'value'      => $request->request->get('value')
+            ]
+        );
+
+        /* @var Formatter\JokeFormatter $jokeFormatter */
+        $jokeFormatter = new Formatter\JokeFormatter($app['url_generator']);
+
+        return new Model\JsonResponse(
+            $jokeFormatter->format($jokeFacade->insert($joke))
+        );
+    }
+
+    /**
+     *
+     * @param  \Silex\Application     $app
+     * @param  HttpFoundation\Request $request
      * @param  string                 $id
      * @throws Exception\NotFoundHttpException
      * @return string|Model\JsonResponse
@@ -67,7 +99,7 @@ class JokesController
     public function getAction(\Silex\Application $app, HttpFoundation\Request $request, $id)
     {
         /* @var \Chuck\JokeFacade $jokeFacade */
-        $jokeFacade =  $app['chuck.joke'];
+        $jokeFacade = $app['chuck.joke'];
 
         if ('application/json' === $request->headers->get('accept')) {
             /* @var Entity\Joke $joke */
