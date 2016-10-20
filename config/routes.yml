@@ -3,7 +3,13 @@ api :
     methods  : GET
     defaults :
         _controller : \Chuck\App\Api\Controller\IndexController::indexAction
-        
+
+privacy :
+    path     : /privacy
+    methods  : GET
+    defaults :
+        _controller : \Chuck\App\Api\Controller\PrivacyController::indexAction
+
 connect:
     prefix   : /connect/
     resource : routes/connect.yml
