@@ -1,9 +1,12 @@
 <?php
 
 /**
- * ServicesLoader.php - created Mar 6, 2016 3:03:18 PM
+ * ServicesLoader.php - created 23 Oct 2016 10:28:25
  *
- * @copyright Copyright (c) pinkbigmacmedia
+ * @copyright Copyright (c) Mathias Schilling <m@matchilling>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  *
  */
 namespace Chuck\App\Api;
@@ -68,8 +71,10 @@ class ServicesLoader implements \Silex\ServiceProviderInterface
                     'blackfire_server_token'      => getenv('BLACKFIRE_SERVER_TOKEN')      ? : null,
                     'database_url'                => getenv('DATABASE_URL')                ? : null,
                     'facebook_app_id'             => getenv('FACEBOOK_APP_ID')             ? : null,
+                    'facebook_app_page_id'        => getenv('FACEBOOK_APP_PAGE_ID')        ? : null,
                     'facebook_app_secret'         => getenv('FACEBOOK_APP_SECRET')         ? : null,
-                    'facebook_page_access_token'  => getenv('FACEBOOK_PAGE_ACCESS_TOKEN') ? : null,
+                    'facebook_jssdk_version'      => getenv('FACEBOOK_JSSDK_VERSION')      ? : null,
+                    'facebook_page_access_token'  => getenv('FACEBOOK_PAGE_ACCESS_TOKEN')  ? : null,
                     'facebook_verification_token' => getenv('FACEBOOK_VERIFICATION_TOKEN') ? : null,
                     'logzio_api_key'              => getenv('LOGZIO_API_KEY')              ? : null,
                     'mongodb_uri'                 => getenv('MONGODB_URI')                 ? : null,
