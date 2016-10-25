@@ -74,6 +74,10 @@ $app->error(function (\Exception $exception, $httpStatusCode) use ($app) {
         return;
     }
 
+    if (\Symfony\Component\HttpFoundation\Response::HTTP_NOT_FOUND === $httpStatusCode) {
+        return $app['twig']->render('error_404.html');
+    }
+
     return $app->json([
         'message' => 'Whoops, looks like something went wrong.'
     ]);
