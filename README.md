@@ -15,32 +15,44 @@ beard, and his role in the action television series Walker, Texas Ranger.
 
 ## Usage
 
-
-```
-// Retrieve a random chuck joke in JSON format
+```sh
+// Retrieve a random chuck joke
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/random' \
-       --header 'content-type: application/json'
-
-// Retrieve a random chuck joke in plain text
-$ curl --request GET \
-       --url 'https://api.chucknorris.io/jokes/random' \
-       --header 'accept: text/plain'
+       --header 'accept: (application/json|text/plain)'
 
 // Add an optional `category` parameter to get a random joke from the given category
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/random?category=dev' \
-       --header 'content-type: application/json'
+       --header 'accept: (application/json|text/plain)'
 
 // Retrieve a list of available categories
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/categories' \
-       --header 'content-type: application/json'
+       --header 'accept: (application/json|text/plain)'
 
 // Free text search
 $ curl --request GET \
        --url 'https://api.chucknorris.io/jokes/search?query={query}' \
-       --header 'content-type: application/json'
+       --header 'accept: (application/json|text/plain)'
+
+// Create a new joke
+$ curl --request POST \
+       --url https://api.chucknorris.io/jokes \
+       --header 'accept: application/json' \
+       --header 'authorization: Bearer {token}' \
+       --header 'content-type: application/json' \
+       --data '{
+         "categories": [ "dev" ],
+         "value": "Everybody thinks the Galaxy Note 7 is explosive. In fact it is only Chuck Norris who tries to send a WhatsApp message with a selfie to his fans." }'
+
+// Update an existing joke
+$ curl --request PUT \
+       --url https://api.chucknorris.io/jokes/{joke_id} \
+       --header 'accept: application/json' \
+       --header 'authorization: Bearer {token}' \
+       --header 'content-type: application/json' \
+       --data '{ "categories": [ "food" ] }'
 ```
 
 Example response:
